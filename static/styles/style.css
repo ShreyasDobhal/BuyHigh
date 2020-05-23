@@ -1,0 +1,68 @@
+/* Navbar components  */
+#logoImg {
+    filter: invert(1);
+}
+.nav-item {
+    padding: 6px;
+}
+.spaceTop {
+    margin-top: 120px;
+}
+
+/* Thumbnail Cards  */
+.thumbnailGroup{
+    display: grid;
+    /* border: 2px solid blue; */
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Cards */
+.card{
+    /* border: 2px solid red; */
+    margin: 20px;
+}
+.card img{
+    padding: 12px;
+}
+.card .btn{
+    width: 100%;
+    margin: 9px;
+}
+
+/* For large screen  */
+@media only screen and (min-width:576px)  {
+    /* Carousel */
+    .card{
+        margin-left: 20px;
+    }
+    
+}
+
+/* For smaller screens */
+@media only screen and (max-width:500px)  {
+    /* Carousel */
+    .thumbnailGroup{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    
+}
+
+
+/* For even smaller screens */
+@media only screen and (max-width:1000px) and (min-width:500px) {
+    /* Carousel */
+    .thumbnailGroup{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}
+  
+
+
+
+.spacer{
+    height: 600px;
+    /* border: 2px solid red; */
+}

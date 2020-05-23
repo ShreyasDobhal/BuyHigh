@@ -9,6 +9,9 @@ const app = express();
 const port = 4000;
 const dbName = 'test'
 
+const dataJSON = JSON.parse(fs.readFileSync('routes.json'));
+console.log(dataJSON);
+
 // MONGOOSE
 mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true});
 var contactSchema = new mongoose.Schema({
@@ -43,13 +46,14 @@ app.set('views',path.join(__dirname,'views'));
 app.get('/',(req,res)=>{
     // Simple text on webpage
     res.send('Server is running . . . ');
+    // res.send(dataJSON);
 });
 
 app.get('/home',(req,res)=>{
     // Sending parameters and rendering a webpage
     const params = {
         title:'BuyHigh',
-        content: 'Server Running'
+        routes: dataJSON
     };
     res.status(200).render('home.pug',params);
 });

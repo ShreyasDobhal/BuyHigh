@@ -1,19 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>#{title}</title>
-    style
-        include ../static/styles/style.css
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles/style.css">
+    <link rel="stylesheet" href="../static/styles/home-style.css">
+    <title>BuyHigh</title>
 </head>
 
 <body>
-    <h1>#{content}</h1>
-    <p>
-        | #{content}
-        <br>Rendered using pug template engine
-    </p>
+    
+    
+    <!-- Start of Nav bar  -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href=#{routes.home}>
+            <img src="../static/images/logo.png" width="30" height="30" alt="" loading="lazy" id='logoImg'>
+        </a>
+        <a class="navbar-brand" href=#{routes.home}>BuyHigh</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href=#{routes.home}>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=#{routes.about}>About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#{routes.contact}">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <button class="btn btn-outline-secondary my-2 my-sm-0 mx-2" id="btnSignIn">Sign in</button>
+            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href=#{routes.signup}>Sign up</a>
+
+        </div>
+    </nav>
+    <!-- End of Nav bar -->
+
+    <!-- Start of Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="../static/images/bg7.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/bg3.jpeg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/bg6.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/bg5.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="../static/images/bg1.jpeg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <div class="main-text hidden-xs" id="carouselStaticText">
+            <div class="col-md-12 text-center">
+                <h1>Welcome to BuyHigh</h1>
+                <h3>Browse Select Pay Enjoy</h3>
+            </div>
+        </div>
+    </div>
+    <!-- End of Carousel  -->
+
+    <!-- Start of Card Group -->
+    <div class="thumbnailGroup">
+        <div class="card">
+            <img src="../static/images/category_book.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Books & Stationary  <span class="badge badge-danger">Out of Stock</span> </h5>
+                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_beauty.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Beauty Products</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_clothing.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Clothing</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_computer.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Computers & Accessories</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_garden.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Garden & Outdoors</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_furniture.jpeg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Furniture</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_kitchen.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Home and Kitchen</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_shoes.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Shoes & Handbags</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_toys.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Toys</h5>
+            </div>
+        </div>
+        <div class="card">
+            <img src="../static/images/category_watch.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Watches & Wallets</h5>
+            </div>
+        </div>
+    </div>
+    <!-- End of Card Group  -->
+
+
+    <!-- Start of Sign in Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Sign in Modal -->
+
+    <div class="spacer">
+
+    </div>
+
+
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="../static/javascript/client.js"></script>
+
 </html>

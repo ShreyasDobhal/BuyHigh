@@ -1,0 +1,38 @@
+/* Carousel */
+#carouselExampleIndicators{
+    opacity: 0.9;
+    margin-top: 65px;
+}
+#carouselStaticText{
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    color: white;
+}
+#carouselStaticText h1{
+    font-size: 4rem;
+}
+
+/* For smaller screens */
+@media only screen and (max-width:1500px) {
+    
+}
+  
+
+/* For even smaller screens */
+@media only screen and (max-width:1000px) {
+    /* Carousel */
+    #carouselExampleIndicators{
+        margin-top: 55px;
+    }
+    #carouselStaticText{
+        top: 17px;
+    }
+    #carouselStaticText h1{
+        font-size: 1.65rem;
+    }
+    #carouselStaticText h3{
+        display: none;
+    }
+}
+  
