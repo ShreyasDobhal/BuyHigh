@@ -100,7 +100,7 @@ router.post('/edit/:proId',(req,res)=>{
     });
 });
 
-app.delete('/delete/:proId',(req,res)=>{
+router.delete('/delete/:proId',(req,res)=>{
     // DELETE method to handle delete request
     console.log("Request Body");
     console.log(req.body);
