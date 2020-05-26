@@ -11,6 +11,16 @@
 </head>
 
 <body>
+
+    <!-- Start of Alert  -->
+    <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
+        <span>#{alertMessage}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- End of Alert  -->
+
     <div class="main-text hidden-xs" id="carouselStaticText">
         <div class="col-md-12 text-center">
             <h1>BuyHigh</h1>
@@ -18,25 +28,34 @@
         </div>
     </div>
     <div class="container col-md-6">
-        <form action="/products/add" method="POST">
-        <!-- <form action="/addproduct"> -->
+        <form action="/products/add" method="POST" enctype="multipart/form-data">
+            <!-- <form action="/addproduct"> -->
             <div class="form-group">
-                <label for="inputTitle">Product title</label>
+                <label for="inputTitle">Product Name</label>
                 <input type="text" class="form-control" id="inputTitle" name="title">
             </div>
             <div class="form-group">
-                <label for="inputAuthor">Product Author</label>
-                <input type="text" class="form-control" id="inputAuthor" name="author">
+                <label for="inputSeller">Product Seller</label>
+                <input type="text" class="form-control" id="inputSeller" name="seller">
             </div>
             <div class="form-group">
                 <label for="inputDescription">Product Description</label>
                 <textarea class="form-control" id="inputDescription" rows="3" name="description"></textarea>
             </div>
             <div class="form-group">
+                <label for="inputPrice">Price</label>
+                <input type="number" class="form-control" id="inputPrice" name="price">
+            </div>
+            <div class="form-group">
                 <label for="inputStatus">Product Status</label>
                 <input type="text" class="form-control" id="inputAuthor" name="status">
             </div>
-            
+
+            <div class="form-group">
+                <label for="inputImage">Upload an image</label>
+                <input type="file" class="form-control-file" id="inputImage" name="thumbnail">
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

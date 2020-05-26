@@ -9,11 +9,21 @@
     margin-top: 120px;
 }
 
+/* Alert */
+.alert {
+    position: fixed;
+    width: 100%;
+    top: 66px;
+    z-index: 5;
+}
+
+
+
 /* Thumbnail Cards  */
 .thumbnailGroup{
     display: grid;
     /* border: 2px solid blue; */
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 /* Cards */
@@ -60,7 +70,9 @@
 }
   
 
-
+.hiddenElement{
+    display: none;
+}
 
 .spacer{
     height: 600px;

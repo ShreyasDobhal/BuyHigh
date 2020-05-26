@@ -11,6 +11,17 @@
 </head>
 
 <body>
+
+    <!-- Start of Alert  -->
+    <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
+        <span>#{alertMessage}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- End of Alert  -->
+
+
     <div class="main-text hidden-xs" id="carouselStaticText">
         <div class="col-md-12 text-center">
             <h1>BuyHigh</h1>
@@ -21,21 +32,25 @@
         <form action="/products/edit/#{product._id}" method="POST">
         <!-- <form action="/addproduct"> -->
             <div class="form-group">
-                <label for="inputTitle">Product title</label>
+                <label for="inputTitle">Product Name</label>
                 <input type="text" class="form-control" id="inputTitle" name="title" value=#{product.title}>
             </div>
             <div class="form-group">
-                <label for="inputAuthor">Product Author</label>
-                <input type="text" class="form-control" id="inputAuthor" name="author" value=#{product.author}>
+                <label for="inputSeller">Product Seller</label>
+                <input type="text" class="form-control" id="inputSeller" name="seller" value=#{product.seller}>
             </div>
             <div class="form-group">
                 <label for="inputDescription">Product Description</label>
                 <textarea class="form-control" id="inputDescription" rows="3" name="description">#{product.body}</textarea>
             </div>
             <div class="form-group">
+                <label for="inputPrice">Price</label>
+                <input type="number" class="form-control" id="inputPrice" name="price" value=#{product.price}>
+            </div>
+            <div class="form-group">
                 <label for="inputStatus">Product Status</label>
-                <input type="text" class="form-control" id="inputAuthor" name="status" value=#{product.status}>
-                <!-- <textarea class="form-control" id="inputStatus" rows="3"></textarea> -->
+                <textarea class="form-control" id="inputAuthor" row="1" name="status">#{product.status}</textarea>
+                <!-- <input type="text" class="form-control" id="inputAuthor" name="status" value=#{product.status}> -->
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>

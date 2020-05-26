@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const morgan = require('morgan');
 const session = require('express-session');
+const url = require('url');
 const app = express();
 
 const port = 4000;
@@ -76,10 +77,12 @@ app.get('/',(req,res)=>{
 
 app.get('/home',(req,res)=>{
     // Sending parameters and rendering a webpage
-    const params = {
-        title:'BuyHigh'
-    };
-    res.status(200).render('home.pug',params);
+    // res.status(200).render('home.pug',{
+    //     alertMessage:'Welcome to BuyHigh',
+    //     alertType:'alert-danger',
+    //     alertShow:'show'
+    // });
+    res.status(200).render('home.pug');
 });
 
 app.get('/json',(req,res)=>{

@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    
-    
+
+
     <!-- Start of Nav bar  -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href='/home'>
@@ -45,6 +45,15 @@
         </div>
     </nav>
     <!-- End of Nav bar -->
+
+    <!-- Start of Alert  -->
+    <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
+        <span>#{alertMessage}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- End of Alert  -->
 
     <!-- Start of Carousel -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -89,12 +98,14 @@
     </div>
     <!-- End of Carousel  -->
 
+    
+
     <!-- Start of Card Group -->
     <div class="thumbnailGroup">
         <div class="card">
             <img src="/static/images/category_book.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Books & Stationary  <span class="badge badge-danger">Out of Stock</span> </h5>
+                <h5 class="card-title">Books & Stationary</h5>
             </div>
         </div>
         <div class="card">

@@ -1,7 +1,22 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const url = require('url');
 const router = express.Router();
 
 let Product = require('../models/product');
+
+var Storage = multer.diskStorage({
+    destination: './static/uploads/',
+    filename:(req,file,cb)=>{
+        cb(null,file.fieldname+'_'+Date.now()+path.extname(file.originalname));
+    }
+});
+
+var upload = multer({
+    storage: Storage
+}).single('thumbnail');
+
 
 router.get('/',(req,res)=>{
     // View all the products
@@ -15,7 +30,10 @@ router.get('/',(req,res)=>{
             console.log("Products are :");
             console.log(products);
             res.status(200).render('products.pug',{
-                products: products
+                products: products,
+                alertMessage: req.query.alertMessage,
+                alertType: req.query.alertType,
+                alertShow: req.query.alertShow
             });
         }
     });
@@ -30,9 +48,16 @@ router.get('/view/:proId',(req,res)=>{
         } else {
             console.log(product);
             let products = [product]
-            res.status(200).render('products.pug',{
-                products: products
-            });
+            if (product==null) {
+                // No Product found
+                // TODO provide better fallback
+                res.status(200).send('Product Not Found');
+            } else {
+                res.status(200).render('products.pug',{
+                    products: products
+                });
+            }
+            
         }
     });
 });
@@ -42,15 +67,24 @@ router.get('/add',(req,res)=>{
     res.status(200).render('add-product.pug');
 });
 
-router.post('/add',(req,res)=>{
+
+router.post('/add',upload,(req,res)=>{
     // POST method to handle add request
+    console.log(req.file.filename+' added successfully');
+
     console.log("Request Body");
     console.log(req.body);
+    console.log("File received");
+    console.log(req.file);
+
     let product = new Product();
     product.title = req.body.title;
-    product.author = req.body.author;
+    product.seller = req.body.seller;
     product.body = req.body.description;
+    product.price = req.body.price;
     product.status = req.body.status;
+    product.thumbnail = req.file.filename;
+    product.date = new Date();
 
     product.save((err,product)=>{
         if (err) {
@@ -58,7 +92,15 @@ router.post('/add',(req,res)=>{
             console.log(err);
             return;
         } else {
-            res.redirect('/products');
+            let string = encodeURIComponent('product was addedd successfully and routed');
+            res.redirect(url.format({
+                pathname:"/products",
+                query: {
+                   'alertMessage': 'Product added successfully',
+                   'alertType': 'alert-success',
+                   'alertShow':'show'
+                 }
+              }));
         }
     });
 });
@@ -85,8 +127,9 @@ router.post('/edit/:proId',(req,res)=>{
     console.log(req.body);
     let product = {};
     product.title = req.body.title;
-    product.author = req.body.author;
+    product.seller = req.body.seller;
     product.body = req.body.description;
+    product.price = req.body.price;
     product.status = req.body.status;
 
     Product.updateOne({'_id':req.params.proId},product,(err,product)=>{

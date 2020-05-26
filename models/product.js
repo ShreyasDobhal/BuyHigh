@@ -5,8 +5,12 @@ let productSchema = mongoose.Schema({
     title: {
         type: String,
         required: true 
-    }, 
-    author: {
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    seller: {
         type: String,
         required: true
     },
@@ -16,6 +20,13 @@ let productSchema = mongoose.Schema({
     },
     status: {
         type: String
+    },
+    thumbnail: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date
     }
 });
 
