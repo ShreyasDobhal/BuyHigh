@@ -15,10 +15,10 @@
     
     <!-- Start of Nav bar  -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href=#{routes.home}>
+        <a class="navbar-brand" href='/home'>
             <img src="../static/images/logo.png" width="30" height="30" alt="" loading="lazy" id='logoImg'>
         </a>
-        <a class="navbar-brand" href=#{routes.home}>BuyHigh</a>
+        <a class="navbar-brand" href='/home'>BuyHigh</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,6 +35,10 @@
                     <a class="nav-link" href="#{routes.contact}">Contact Us <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+            <div class="col-md-6 mr-auto">
+                <input class="col-md-10" type="text">
+                <button class="btn btn-primary">Go</button>
+            </div>
             <button class="btn btn-outline-secondary my-2 my-sm-0 mx-2" id="btnSignIn">Sign in</button>
             <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href=#{routes.signup}>Sign up</a>
 
@@ -91,8 +95,6 @@
             <img src="../static/images/category_book.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Books & Stationary  <span class="badge badge-danger">Out of Stock</span> </h5>
-                <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
             </div>
         </div>
         <div class="card">
