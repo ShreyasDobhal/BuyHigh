@@ -27,7 +27,10 @@ let productSchema = mongoose.Schema({
     },
     date: {
         type: Date
-    }
+    },
+    tags: [
+        mongoose.Schema.Types.String
+    ]
 });
 
 let Product = module.exports = mongoose.model('Product',productSchema);

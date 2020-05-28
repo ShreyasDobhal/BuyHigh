@@ -62,6 +62,37 @@ router.get('/view/:proId',(req,res)=>{
     });
 });
 
+
+router.get('/search/:tag',(req,res)=>{
+    // View all the products
+    var tag = new RegExp(["^", req.params.tag, "$"].join(""), "i");
+    Product.find({tags:tag}, function(err,products){
+        if (err) {
+            console.log("Error in displaying all products");
+            console.log(err);
+            res.send("Error");
+        } else {
+            console.log("Products are :");
+            console.log(products);
+            let alertMessage = '';
+            let alertType = '';
+            let alertShow = '';
+
+            if (products.length==0) {
+                alertMessage = 'No product matched your search';
+                alertType = 'alert-danger';
+                alertShow = 'show';
+            }
+            res.status(200).render('products.pug',{
+                products: products,
+                alertMessage: alertMessage,
+                alertType: alertType,
+                alertShow: alertShow
+            });
+        }
+    });
+});
+
 router.get('/add',(req,res)=>{
     // Add a product
     res.status(200).render('add-product.pug');
@@ -77,6 +108,10 @@ router.post('/add',upload,(req,res)=>{
     console.log("File received");
     console.log(req.file);
 
+    let tags = req.body.tags.split(',');
+    for (let i=0;i<tags.length;i++)
+        tags[i]=tags[i].trim();
+
     let product = new Product();
     product.title = req.body.title;
     product.seller = req.body.seller;
@@ -85,6 +120,7 @@ router.post('/add',upload,(req,res)=>{
     product.status = req.body.status;
     product.thumbnail = req.file.filename;
     product.date = new Date();
+    product.tags = tags;
 
     product.save((err,product)=>{
         if (err) {
@@ -125,12 +161,18 @@ router.post('/edit/:proId',(req,res)=>{
     // Post method to handle edit request
     console.log("Request Body");
     console.log(req.body);
+
+    let tags = req.body.tags.split(',');
+    for (let i=0;i<tags.length;i++)
+        tags[i]=tags[i].trim();
+
     let product = {};
     product.title = req.body.title;
     product.seller = req.body.seller;
     product.body = req.body.description;
     product.price = req.body.price;
     product.status = req.body.status;
+    product.tags = tags;
 
     Product.updateOne({'_id':req.params.proId},product,(err,product)=>{
         if (err) {
