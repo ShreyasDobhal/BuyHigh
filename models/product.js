@@ -30,7 +30,11 @@ let productSchema = mongoose.Schema({
     },
     tags: [
         mongoose.Schema.Types.String
-    ]
+    ],
+    category: {
+        type: String,
+        required: true
+    }
 });
 
 let Product = module.exports = mongoose.model('Product',productSchema);

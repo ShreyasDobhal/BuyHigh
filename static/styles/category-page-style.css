@@ -1,0 +1,24 @@
+
+
+
+/* For large screen  */
+@media only screen and (min-width:1000px)  {
+    #categoryImage{
+        width: 100%;
+        display: block!important;
+    }
+    #categoryImageSmall{
+        display: none;
+    }
+}
+
+/* For smaller screens */
+@media only screen and (max-width:1000px)  {
+    #categoryImage{
+        display: none;
+    }
+    #categoryImageSmall{
+        width: 100%;
+        display: block!important;
+    }
+}

@@ -11,9 +11,6 @@ const app = express();
 const port = 4000;
 const dbName = 'buyhigh';
 
-// const dataJSON = JSON.parse(fs.readFileSync('routes.json'));
-// console.log(dataJSON);
-
 let Product = require('./models/product');
 
 // MONGOOSE
@@ -67,6 +64,9 @@ app.use('/articles',articles);
 // /products
 let products = require('./routes/products.js');
 app.use('/products',products);
+// /category
+let category = require('./routes/category.js');
+app.use('/category',category);
 
 
 // END POINTS

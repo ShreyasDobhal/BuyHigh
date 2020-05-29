@@ -74,6 +74,10 @@
     display: none;
 }
 
+.navbarSpacer{
+    margin-top: 83px;
+}
+
 .spacer{
     height: 600px;
     /* border: 2px solid red; */

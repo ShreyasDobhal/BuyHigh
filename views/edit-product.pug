@@ -45,6 +45,23 @@
                 <textarea class="form-control" id="inputDescription" rows="3" name="description">#{product.body}</textarea>
             </div>
             <div class="form-group">
+                <label for="inputCategory">Product Category</label>
+                <select class="custom-select form-control" id="inputCategory" name="category">
+                    <option value=#{product.category} selected>#{categoryName}</option>
+                    <option value="book">Books & Stationary</option>
+                    <option value="beauty">Beauty Products</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="computer">Mobile & Computer</option>
+                    <option value="garden">Garden & Outdoors</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="kitchen">Home & Kitchen</option>
+                    <option value="shoes">Shoes & Handbags</option>
+                    <option value="toys">Toys</option>
+                    <option value="watch">Watches & Wallets</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="inputPrice">Price</label>
                 <input type="number" class="form-control" id="inputPrice" name="price" value=#{product.price}>
             </div>

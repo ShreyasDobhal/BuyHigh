@@ -6,6 +6,19 @@ const router = express.Router();
 
 let Product = require('../models/product');
 
+let categoryMap = {
+    'beauty':'Beauty Products',
+    'clothing':'Clothing',
+    'computer':'Mobile & Computer',
+    'garden':'Garden & Outdoors',
+    'furniture':'Furniture',
+    'kitchen':'Home & Kitchen',
+    'shoes':'Shoes & Handbags',
+    'toys':'Toys',
+    'watch':'Watches & Wallets',
+    'other':'Other'
+};
+
 var Storage = multer.diskStorage({
     destination: './static/uploads/',
     filename:(req,file,cb)=>{
@@ -121,6 +134,7 @@ router.post('/add',upload,(req,res)=>{
     product.thumbnail = req.file.filename;
     product.date = new Date();
     product.tags = tags;
+    product.category = req.body.category;
 
     product.save((err,product)=>{
         if (err) {
@@ -151,7 +165,8 @@ router.get('/edit/:proId',(req,res)=>{
             console.log(product);
             // let products = [product]
             res.status(200).render('edit-product.pug',{
-                product: product
+                product: product,
+                categoryName: categoryMap[product.category]
             });
         }
     });
@@ -173,6 +188,7 @@ router.post('/edit/:proId',(req,res)=>{
     product.price = req.body.price;
     product.status = req.body.status;
     product.tags = tags;
+    product.category = req.body.category;
 
     Product.updateOne({'_id':req.params.proId},product,(err,product)=>{
         if (err) {
