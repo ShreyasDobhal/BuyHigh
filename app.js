@@ -82,6 +82,7 @@ app.get('/home',(req,res)=>{
     //     alertType:'alert-danger',
     //     alertShow:'show'
     // });
+    // eval(require('locus'));
     res.status(200).render('home.pug');
 });
 

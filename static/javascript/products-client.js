@@ -2,6 +2,13 @@
 $(document).ready(function(){
     console.log("products.client.js ready");
 
+    $('.thumbnailGroup .card').on('click',function(){
+        console.log('Product clicked');
+        let $card = $(this);
+        let proId = $card.attr('data-productId');
+        window.location.href = '/products/view/'+proId;
+    });
+
     let $productCard = $('.thumbnailGroup .card')
     for (let i=0;i<$productCard.length;i++) {
         let $productStatus = $productCard.eq(i).find('.card-title span');

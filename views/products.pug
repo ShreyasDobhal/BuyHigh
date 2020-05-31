@@ -12,6 +12,67 @@
 
 <body>
 
+    <!-- Start of Nav bar  -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href='/home'>
+            <img src="/static/images/logo.png" width="30" height="30" alt="" loading="lazy" id='logoImg'>
+        </a>
+        <a class="navbar-brand" href='/home'>BuyHigh</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href='/home'>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <div class="dropdown nav-item">
+                        <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/category/book">Books & Stationary</a>
+                            <a class="dropdown-item" href="/category/beauty">Beauty Products</a>
+                            <a class="dropdown-item" href="/category/clothing">Clothing</a>
+                            <a class="dropdown-item" href="/category/computer">Mobile & Computer</a>
+                            <a class="dropdown-item" href="/category/garden">Garden & Outdoors</a>
+                            <a class="dropdown-item" href="/category/furniture">Furniture</a>
+                            <a class="dropdown-item" href="/category/kitchen">Home & Kitchen</a>
+                            <a class="dropdown-item" href="/category/shoes">Shoes & Handbags</a>
+                            <a class="dropdown-item" href="/category/toys">Toys</a>
+                            <a class="dropdown-item" href="/category/watch">Watches & Wallets</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/category/other">Other</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='/products'>Products <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='/about'>About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+
+                
+            </ul>
+            <!-- class="col-md-6 mr-auto" -->
+            <!-- <div class="input-group mb-3"> -->
+            <div class="input-group col-md-6 container-sm  mr-auto sm-my-5">
+                <input id="txtSearch" type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
+            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
+
+        </div>
+    </nav>
+    <!-- End of Nav bar -->
+    <div class="navbarSpacer"></div>
 
     <!-- Start of Alert  -->
     <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
@@ -22,9 +83,17 @@
     </div>
     <!-- End of Alert  -->
 
+    
+    <!-- Start of Empty List Handler -->
+    if isEmpty == true
+        <div class="errorImageHolder">
+            <img src="/static/images/no-product-found.gif" alt="">
+            <button id="btnExploreCategories" type="button" class="btn btn-primary btn-lg">Explore more</button>
+        </div>
+    <!-- End of Empty List Handler -->
+    
 
     <!-- Start of Products Display Grid -->
-    <h1>Products</h1>
     <div class="thumbnailGroup">
         each product,i in products
             <div class="card" data-productId='#{product._id}' data-productDate='#{product.date}'>
@@ -57,6 +126,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="/static/javascript/client.js"></script>
 <script src="/static/javascript/products-client.js"></script>
 
 </html>

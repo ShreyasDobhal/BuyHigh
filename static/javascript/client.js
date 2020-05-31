@@ -12,6 +12,12 @@ $(document).ready(function() {
         window.location.href = '/home';
     });
 
+    $("#txtSearch").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#btnSearch").click();
+        }
+    });
+
     $('#btnSearch').on('click',function(){
         console.log('Search button clicked');
         let searchQuery = $('#txtSearch').val().trim();

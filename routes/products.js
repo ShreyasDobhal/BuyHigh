@@ -43,12 +43,24 @@ router.get('/',(req,res)=>{
         } else {
             console.log("Products are :");
             console.log(products);
-            res.status(200).render('products.pug',{
-                products: products,
-                alertMessage: req.query.alertMessage,
-                alertType: req.query.alertType,
-                alertShow: req.query.alertShow
-            });
+            if (products.length==0) {
+                // Empty product list
+                res.status(200).render('products.pug',{
+                    products: products,
+                    alertMessage: '0 products found',
+                    alertType: 'alert-danger',
+                    alertShow: 'show',
+                    isEmpty: true
+                });
+            } else {
+                res.status(200).render('products.pug',{
+                    products: products,
+                    alertMessage: req.query.alertMessage,
+                    alertType: req.query.alertType,
+                    alertShow: req.query.alertShow
+                });
+            }
+            
         }
     });
 });
@@ -56,22 +68,22 @@ router.get('/',(req,res)=>{
 router.get('/view/:proId',(req,res)=>{
     // View product with given id
     Product.findById(req.params.proId,function(err,product){
-        if (err) {
+        if (err || product==null) {
             console.log("Error in searching");
-            return;
+            // console.log(err);
+            res.status(200).render('products.pug',{
+                products: [],
+                alertMessage: 'No such product found',
+                alertType: 'alert-danger',
+                alertShow: 'show',
+                isEmpty: true
+            });
         } else {
             console.log(product);
             let products = [product]
-            if (product==null) {
-                // No Product found
-                // TODO provide better fallback
-                res.status(200).send('Product Not Found');
-            } else {
-                res.status(200).render('products.pug',{
-                    products: products
-                });
-            }
-            
+            res.status(200).render('products.pug',{
+                products: products
+            });
         }
     });
 });
@@ -88,21 +100,22 @@ router.get('/search/:tag',(req,res)=>{
         } else {
             console.log("Products are :");
             console.log(products);
-            let alertMessage = '';
-            let alertType = '';
-            let alertShow = '';
 
             if (products.length==0) {
-                alertMessage = 'No product matched your search';
-                alertType = 'alert-danger';
-                alertShow = 'show';
+                // No products found
+                res.status(200).render('products.pug',{
+                    products: products,
+                    alertMessage: 'No product matched your search',
+                    alertType: 'alert-danger',
+                    alertShow: 'show',
+                    isEmpty: true
+                });
+            } else {
+                res.status(200).render('products.pug',{
+                    products:products
+                })
             }
-            res.status(200).render('products.pug',{
-                products: products,
-                alertMessage: alertMessage,
-                alertType: alertType,
-                alertShow: alertShow
-            });
+            
         }
     });
 });
