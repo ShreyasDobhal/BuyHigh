@@ -35,11 +35,15 @@
                     <a class="nav-link" href="/contact">Contact Us <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <div class="col-md-6 mr-auto">
-                <input class="col-md-10" type="text">
-                <button class="btn btn-primary">Go</button>
+            <!-- class="col-md-6 mr-auto" -->
+            <!-- <div class="input-group mb-3"> -->
+            <div class="input-group col-md-6 container-sm  mr-auto sm-my-5">
+                <input id="txtSearch" type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
+                </div>
             </div>
-            <button class="btn btn-outline-secondary my-2 my-sm-0 mx-2" id="btnSignIn">Sign in</button>
+            <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
             <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
 
         </div>
@@ -98,65 +102,64 @@
     </div>
     <!-- End of Carousel  -->
 
-    
 
     <!-- Start of Card Group -->
     <div class="thumbnailGroup">
-        <div class="card">
+        <div class="card" data-category='book'>
             <img src="/static/images/category_book.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Books & Stationary</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='beauty'>
             <img src="/static/images/category_beauty.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Beauty Products</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='clothing'>
             <img src="/static/images/category_clothing.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Clothing</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='computer'>
             <img src="/static/images/category_computer.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Mobile & Computer</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='garden'>
             <img src="/static/images/category_garden.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Garden & Outdoors</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='furniture'>
             <img src="/static/images/category_furniture.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Furniture</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='kitchen'>
             <img src="/static/images/category_kitchen.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Home and Kitchen</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='shoes'>
             <img src="/static/images/category_shoes.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Shoes & Handbags</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='toys'>
             <img src="/static/images/category_toys.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Toys</h5>
             </div>
         </div>
-        <div class="card">
+        <div class="card" data-category='watch'>
             <img src="/static/images/category_watch.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Watches & Wallets</h5>
@@ -209,5 +212,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="/static/javascript/client.js"></script>
+<script src="/static/javascript/home-client.js"></script>
 
 </html>

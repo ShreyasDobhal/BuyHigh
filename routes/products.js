@@ -7,6 +7,7 @@ const router = express.Router();
 let Product = require('../models/product');
 
 let categoryMap = {
+    'book':'Books & Stationary',
     'beauty':'Beauty Products',
     'clothing':'Clothing',
     'computer':'Mobile & Computer',

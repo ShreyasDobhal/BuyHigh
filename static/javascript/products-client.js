@@ -1,8 +1,8 @@
 
 $(document).ready(function(){
-    console.log("Document ready");
+    console.log("products.client.js ready");
 
-    let $productCard = $('.card .card-body')
+    let $productCard = $('.thumbnailGroup .card')
     for (let i=0;i<$productCard.length;i++) {
         let $productStatus = $productCard.eq(i).find('.card-title span');
         let status = $productStatus[0].innerHTML;
@@ -18,7 +18,8 @@ $(document).ready(function(){
         } else if (status=='Offer' || status=='Sale' || status=='Discount') {
             $productStatus.eq(0).addClass('badge-warning');
         } else if (status=='') {
-            let date = $productCard.eq(i).find('p.hiddenElement')[0].innerHTML;
+            // let date = $productCard.eq(i).find('p.hiddenElement')[0].innerHTML;
+            let date = $productCard.eq(i).attr('data-productDate');
             if (date!='') {
                 let date1 = new Date(date);
                 let date2 = new Date();

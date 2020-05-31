@@ -61,30 +61,40 @@
     <!-- Start of carousel -->
     <div class="categoryImageHolder">
         <img src=#{categoryImage} id="categoryImage" onerror=this.src="/static/images/category_page_default.jpg">
-        <img src=#{categoryImageSmall} id="categoryImageSmall"  onerror=this.src="/static/images/category_page_small_default.jpg">
+        <img src=#{categoryImageSmall} id="categoryImageSmall" onerror=this.src="/static/images/category_page_small_default.jpg">
     </div>
     <!-- End of carousel -->
 
-
+    <!-- Start of Heading -->
     <div class="main-text hidden-xs my-5" id="carouselStaticText">
         <div class="col-md-12 text-center">
             <h1>#{categoryName}</h1>
         </div>
     </div>
-    
+    <!-- End of Heading  -->
 
+    if isEmpty == true
+        <div class="errorImageHolder">
+            <img src="/static/images/no-product-found.png" alt="">
+            <button id="btnExploreCategories" type="button" class="btn btn-primary btn-lg">Explore other categories</button>
+        </div>
+        
+    <!-- Start of Products Display Grid -->
     <div class="thumbnailGroup">
         each product,i in products
-            <div class="card">
+            <div class="card" data-productId='#{product._id}' data-productDate='#{product.date}'>
                 <img src="/static/uploads/#{product.thumbnail}" class="card-img-top" alt="Failed to load image" onerror=this.src="/static/images/default.png">
                 <div class="card-body">
                     <h5 class="card-title">#{product.title} <span class="badge">#{product.status}</span> </h5>
                     <p>#{product.body}</p>
-                    <small class="text-muted">#{product._id}</small>
-                    <p class="text-muted hiddenElement">#{product.date}</p>
+                    <!-- <small class="text-muted">#{product._id}</small> -->
+                    <!-- <p class="text-muted hiddenElement">#{product.date}</p> -->
                 </div>
             </div>
     </div>
+    <!-- End of Products Display Gird  -->
+
+    
 
 
     <!-- Start of Sign in Modal -->
@@ -130,5 +140,8 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="/static/javascript/client.js"></script>
+<script src="/static/javascript/products-client.js"></script>
+<script src="/static/javascript/category-page-client.js"></script>
+
 
 </html>

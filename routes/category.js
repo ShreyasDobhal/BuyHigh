@@ -6,6 +6,7 @@ const router = express.Router();
 let Product = require('../models/product');
 
 let categoryMap = {
+    'book':'Books & Stationary',
     'beauty':'Beauty Products',
     'clothing':'Clothing',
     'computer':'Mobile & Computer',
@@ -39,7 +40,8 @@ router.get('/:category',(req,res)=>{
                     products: products,
                     alertMessage: 'No Products Found',
                     alertType: 'alert-danger',
-                    alertShow: 'show'
+                    alertShow: 'show',
+                    isEmpty: true
 
                 });
             } else {
