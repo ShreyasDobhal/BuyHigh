@@ -34,6 +34,18 @@ let productSchema = mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    rating: {
+        value: Number,
+        val5: Number,
+        val4: Number,
+        val3: Number,
+        val2: Number,
+        val1: Number
+    },
+    quantity: {
+        type: Number,
+        required: true
     }
 });
 

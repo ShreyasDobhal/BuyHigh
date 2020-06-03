@@ -31,6 +31,12 @@ var upload = multer({
     storage: Storage
 }).single('thumbnail');
 
+router.get('/demo',(req,res)=>{
+    Product.find({'_id':'5eca97660e46221ae33a4dcf'},function(err,products) {
+        console.log(products);
+        res.json(products);
+    });
+});
 
 router.get('/',(req,res)=>{
     // View all the products
@@ -80,8 +86,25 @@ router.get('/view/:proId',(req,res)=>{
             });
         } else {
             console.log(product);
+            let totalRatings=0;
+            let ratePercentage=[0,0,0,0,0];
+            for (let i=0;i<5;i++) {
+                totalRatings += product.rating['val'+(i+1)];
+            }
+            if (totalRatings!=0) {
+                for (let i=0;i<5;i++) {
+                    ratePercentage[i] = 'width: '+(product.rating['val'+(i+1)]/totalRatings*100)+'%;';
+                }
+            }
+            console.log(ratePercentage);
+            
             res.status(200).render('product-page.pug',{
-                product: product
+                product: product,
+                rating5Cnt: ratePercentage[4],
+                rating4Cnt: ratePercentage[3],
+                rating3Cnt: ratePercentage[2],
+                rating2Cnt: ratePercentage[1],
+                rating1Cnt: ratePercentage[0]
             });
         }
     });
@@ -148,6 +171,7 @@ router.post('/add',upload,(req,res)=>{
     product.date = new Date();
     product.tags = tags;
     product.category = req.body.category;
+    product.quantity = req.body.quantity;
 
     product.save((err,product)=>{
         if (err) {
@@ -202,6 +226,7 @@ router.post('/edit/:proId',(req,res)=>{
     product.status = req.body.status;
     product.tags = tags;
     product.category = req.body.category;
+    product.quantity = req.body.quantity;
 
     Product.updateOne({'_id':req.params.proId},product,(err,product)=>{
         if (err) {

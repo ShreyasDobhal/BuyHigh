@@ -98,16 +98,16 @@
         <!-- Product Information Container  -->
         <div class="displayContainer">
             <div class="imageContainer">
-                <img src="/static/images/default.png" alt="">
+                <img src="/static/uploads/#{product.thumbnail}" alt="" onerror=this.src="/static/images/default.png">
             </div>
             <div class="detailContainer">
-                <h2>Product Title </h2>
-                <x-star-rating value='4' number='5' type='static' style="font-size: 38px;"></x-star-rating>
+                <h2>#{product.title}</h2>
+                <x-star-rating value='#{product.rating.value}' number='5' type='static' style="font-size: 38px;"></x-star-rating>
                 <hr>
-                <h4>Price : <span>Rs. 1000<span></h4>
+                <h4>Price : <span>Rs. #{product.price}<span></h4>
                 <div class="description">
                     <h5>Description :</h5>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptatem necessitatibus! Sequi reiciendis incidunt enim fuga assumenda fugiat, possimus eaque repudiandae! Itaque molestias exercitationem alias suscipit quaerat? Reprehenderit harum excepturi iure est laudantium. Ullam nemo modi nulla, omnis possimus labore dignissimos, quos atque pariatur soluta qui magni ipsum sit beatae! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, quia voluptas? Aspernatur voluptatum amet harum, voluptates aliquid, quis eligendi quae esse at, quod ab! Velit, fugiat magnam debitis eveniet sint reiciendis animi error laudantium dolorem vel consequatur autem, quis ea? Perferendis tempore eaque at nihil corrupti delectus, facere ipsa architecto dolores atque quaerat facilis veritatis saepe, cum dolor distinctio unde illo sed minus voluptates autem consectetur aliquam deserunt? Nulla aspernatur, ut officiis, excepturi cupiditate asperiores et repudiandae eligendi cum nisi corrupti illo sed blanditiis deleniti autem magni ipsa adipisci vitae aut. A ex consequatur nulla libero placeat cumque eveniet quaerat!</p>
+                    <p>#{product.body}</p>
                 </div>
             </div>
             <div class="paymentContainer">
@@ -130,36 +130,35 @@
                     <div class="ratingMeter">
                         <div class="ratingNumber">5</div>
                         <div class="ratingBarOutline">
-                            <div class="ratingBar" style="width: 60%;"></div>
+                            <div class="ratingBar" style='#{rating5Cnt}'></div>
                         </div>
                     </div>
                     <div class="ratingMeter">
                         <div class="ratingNumber">4</div>
                         <div class="ratingBarOutline">
-                            <div class="ratingBar" style="width: 20%;"></div>
+                            <div class="ratingBar" style="#{rating4Cnt}"></div>
                         </div>
                     </div>
                     <div class="ratingMeter">
                         <div class="ratingNumber">3</div>
                         <div class="ratingBarOutline">
-                            <div class="ratingBar" style="width: 10%;"></div>
+                            <div class="ratingBar" style="#{rating3Cnt}"></div>
                         </div>
                     </div>
                     <div class="ratingMeter">
                         <div class="ratingNumber">2</div>
                         <div class="ratingBarOutline">
-                            <div class="ratingBar" style="width: 5%;"></div>
+                            <div class="ratingBar" style="#{rating2Cnt}"></div>
                         </div>
                     </div>
                     <div class="ratingMeter">
                         <div class="ratingNumber">1</div>
                         <div class="ratingBarOutline">
-                            <div class="ratingBar" style="width: 5%;"></div>
+                            <div class="ratingBar" style="#{rating1Cnt}"></div>
                         </div>
                     </div>
                 </div>
-                <div class="ratingValue">4.5
-                </div>
+                <div class="ratingValue">#{product.rating.value}</div>
             </div>
             
         </div>
