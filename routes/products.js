@@ -32,7 +32,7 @@ var upload = multer({
 }).single('thumbnail');
 
 router.get('/demo',(req,res)=>{
-    Product.find({'_id':'5eca97660e46221ae33a4dcf'},function(err,products) {
+    Product.find({},function(err,products) {
         console.log(products);
         res.json(products);
     });
@@ -96,7 +96,11 @@ router.get('/view/:proId',(req,res)=>{
                     ratePercentage[i] = 'width: '+(product.rating['val'+(i+1)]/totalRatings*100)+'%;';
                 }
             }
-            console.log(ratePercentage);
+            // console.log(ratePercentage);
+            isCommentEmpty=false;
+            if (product.reviews==undefined || product.reviews.length==0) {
+                isCommentEmpty=true;
+            }
             
             res.status(200).render('product-page.pug',{
                 product: product,
@@ -104,7 +108,8 @@ router.get('/view/:proId',(req,res)=>{
                 rating4Cnt: ratePercentage[3],
                 rating3Cnt: ratePercentage[2],
                 rating2Cnt: ratePercentage[1],
-                rating1Cnt: ratePercentage[0]
+                rating1Cnt: ratePercentage[0],
+                isCommentEmpty: isCommentEmpty
             });
         }
     });

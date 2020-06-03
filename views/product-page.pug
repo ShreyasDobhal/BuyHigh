@@ -188,22 +188,23 @@
                     <h5>No comments added</h5>
                 else
                     <ul class="list-unstyled">
-                        <li class="media my-4">
-                            <img src="/static/images/dp1.png" class="mr-3" alt="...">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">user01</h5>
-                                <p class='my-0'>This product is amazing, can be used by anyone. Easy to learn and get used to it. Makes life very easy</p>
-                                <x-star-rating value='4' number='5' type='static' style="font-size: 22px;"></x-star-rating>
-                            </div>
-                        </li>
-                        <li class="media my-4">
+                        each review,i in product.reviews
+                            <li class="media my-4">
+                                <img src="/static/images/dp#{review.userDP}.png" class="mr-3" alt="..." onerror=this.src="/static/images/dp5.png">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">#{review.userName}</h5>
+                                    <p class='my-0'>#{review.comment}</p>
+                                    <x-star-rating value='#{review.rating}' number='5' type='static' style="font-size: 22px;"></x-star-rating>
+                                </div>
+                            </li>
+                        <!-- <li class="media my-4">
                             <img src="/static/images/dp2.png" class="mr-3" alt="...">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">user02</h5>
                                 <p class='my-0'>Just loved it. Can be used by kids as well as old people.</p>
                                 <x-star-rating value='5' number='5' type='static' style="font-size: 22px;"></x-star-rating>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
             </div>
         </div>
