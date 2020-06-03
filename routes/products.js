@@ -71,8 +71,8 @@ router.get('/view/:proId',(req,res)=>{
         if (err || product==null) {
             console.log("Error in searching");
             // console.log(err);
-            res.status(200).render('products.pug',{
-                products: [],
+            res.status(200).render('product-page.pug',{
+                product: {},
                 alertMessage: 'No such product found',
                 alertType: 'alert-danger',
                 alertShow: 'show',
@@ -80,9 +80,8 @@ router.get('/view/:proId',(req,res)=>{
             });
         } else {
             console.log(product);
-            let products = [product]
-            res.status(200).render('products.pug',{
-                products: products
+            res.status(200).render('product-page.pug',{
+                product: product
             });
         }
     });

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href='/static/styles/style.css'>
+    <link rel="stylesheet" href='/static/styles/product-page-style.css'>
+    <title>BuyHigh</title>
+</head>
+
+<body>
+
+    <!-- Start of Nav bar  -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href='/home'>
+            <img src="/static/images/logo.png" width="30" height="30" alt="" loading="lazy" id='logoImg'>
+        </a>
+        <a class="navbar-brand" href='/home'>BuyHigh</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href='/home'>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <div class="dropdown nav-item">
+                        <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/category/book">Books & Stationary</a>
+                            <a class="dropdown-item" href="/category/beauty">Beauty Products</a>
+                            <a class="dropdown-item" href="/category/clothing">Clothing</a>
+                            <a class="dropdown-item" href="/category/computer">Mobile & Computer</a>
+                            <a class="dropdown-item" href="/category/garden">Garden & Outdoors</a>
+                            <a class="dropdown-item" href="/category/furniture">Furniture</a>
+                            <a class="dropdown-item" href="/category/kitchen">Home & Kitchen</a>
+                            <a class="dropdown-item" href="/category/shoes">Shoes & Handbags</a>
+                            <a class="dropdown-item" href="/category/toys">Toys</a>
+                            <a class="dropdown-item" href="/category/watch">Watches & Wallets</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/category/other">Other</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='/products'>Products <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='/about'>About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+
+
+            </ul>
+            <!-- class="col-md-6 mr-auto" -->
+            <!-- <div class="input-group mb-3"> -->
+            <div class="input-group col-md-5 container-sm  mr-auto sm-my-5">
+                <input id="txtSearch" type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
+                </div>
+            </div>
+            <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
+            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
+
+        </div>
+    </nav>
+    <!-- End of Nav bar -->
+    <div class="navbarSpacer"></div>
+
+    <!-- Start of Alert  -->
+    <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
+        <span>#{alertMessage}</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- End of Alert  -->
+
+
+    if isEmpty == true
+        <!-- Start of Empty Handler -->
+        <div class="errorImageHolder">
+            <img src="/static/images/no-product-found.gif" alt="">
+            <button id="btnExploreCategories" type="button" class="btn btn-primary btn-lg">Explore more</button>
+        </div>
+        <!-- End of Empty Handler -->
+    else
+        <!-- Start of Products Display Card -->
+
+        <!-- Product Information Container  -->
+        <div class="displayContainer">
+            <div class="imageContainer">
+                <img src="/static/images/default.png" alt="">
+            </div>
+            <div class="detailContainer">
+                <h2>Product Title </h2>
+                <x-star-rating value='4' number='5' type='static' style="font-size: 38px;"></x-star-rating>
+                <hr>
+                <h4>Price : <span>Rs. 1000<span></h4>
+                <div class="description">
+                    <h5>Description :</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptatem necessitatibus! Sequi reiciendis incidunt enim fuga assumenda fugiat, possimus eaque repudiandae! Itaque molestias exercitationem alias suscipit quaerat? Reprehenderit harum excepturi iure est laudantium. Ullam nemo modi nulla, omnis possimus labore dignissimos, quos atque pariatur soluta qui magni ipsum sit beatae! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, quia voluptas? Aspernatur voluptatum amet harum, voluptates aliquid, quis eligendi quae esse at, quod ab! Velit, fugiat magnam debitis eveniet sint reiciendis animi error laudantium dolorem vel consequatur autem, quis ea? Perferendis tempore eaque at nihil corrupti delectus, facere ipsa architecto dolores atque quaerat facilis veritatis saepe, cum dolor distinctio unde illo sed minus voluptates autem consectetur aliquam deserunt? Nulla aspernatur, ut officiis, excepturi cupiditate asperiores et repudiandae eligendi cum nisi corrupti illo sed blanditiis deleniti autem magni ipsa adipisci vitae aut. A ex consequatur nulla libero placeat cumque eveniet quaerat!</p>
+                </div>
+            </div>
+            <div class="paymentContainer">
+                <div class="card">
+                    <h5 class="card-header">Payment</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Get this product now</h5>
+                        <!-- <p class="card-text">Get this product now</p> -->
+                        <btn id="btnAddCart" class="btn btn-primary">Add to Cart</btn>
+                        <a href="#" class="btn btn-primary">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Rating Component -->
+        <div class="ratingContainer">
+            <h2>Product Rating</h2>
+            <div class="ratingInfo">
+                <div class="ratingBox">
+                    <div class="ratingMeter">
+                        <div class="ratingNumber">5</div>
+                        <div class="ratingBarOutline">
+                            <div class="ratingBar" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div class="ratingMeter">
+                        <div class="ratingNumber">4</div>
+                        <div class="ratingBarOutline">
+                            <div class="ratingBar" style="width: 20%;"></div>
+                        </div>
+                    </div>
+                    <div class="ratingMeter">
+                        <div class="ratingNumber">3</div>
+                        <div class="ratingBarOutline">
+                            <div class="ratingBar" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                    <div class="ratingMeter">
+                        <div class="ratingNumber">2</div>
+                        <div class="ratingBarOutline">
+                            <div class="ratingBar" style="width: 5%;"></div>
+                        </div>
+                    </div>
+                    <div class="ratingMeter">
+                        <div class="ratingNumber">1</div>
+                        <div class="ratingBarOutline">
+                            <div class="ratingBar" style="width: 5%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ratingValue">4.5
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Feedback Component -->
+        <div class="feedbackContainer">
+            <h2>Add Your Review</h2>
+            <div class="formContainer">
+                <form>
+                    <div class="starRating">
+                        <x-star-rating value='4' number='5' type='input'></x-star-rating>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <textarea class="form-control" id="txtFeedback" rows="6" placeholder="Your feedback"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg mx-3">Add Review</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Comment Component -->
+        <div class="commentContainer">
+            <h2>Comments</h2>
+            
+            <div class="commentSection">
+                if isCommentEmpty == true
+                    <h5>No comments added</h5>
+                else
+                    <ul class="list-unstyled">
+                        <li class="media my-4">
+                            <img src="/static/images/dp1.png" class="mr-3" alt="...">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">user01</h5>
+                                <p class='my-0'>This product is amazing, can be used by anyone. Easy to learn and get used to it. Makes life very easy</p>
+                                <x-star-rating value='4' number='5' type='static' style="font-size: 22px;"></x-star-rating>
+                            </div>
+                        </li>
+                        <li class="media my-4">
+                            <img src="/static/images/dp2.png" class="mr-3" alt="...">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">user02</h5>
+                                <p class='my-0'>Just loved it. Can be used by kids as well as old people.</p>
+                                <x-star-rating value='5' number='5' type='static' style="font-size: 22px;"></x-star-rating>
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        
+
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<script src="/static/javascript/client.js"></script>
+<script src="/static/javascript/product-page-client.js"></script>
+<script src="/static/javascript/StarRating.js"></script>
+
+</html>
