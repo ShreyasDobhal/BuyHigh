@@ -197,6 +197,84 @@ router.post('/add',upload,(req,res)=>{
     });
 });
 
+router.post('/addreview',(req,res)=>{
+    console.log('Request Body');
+    console.log(req.body);
+    // console.log(req.body.proId);
+
+    let review = {
+        userName: req.body.userName,
+        userDP: req.body.userDP,
+        rating: req.body.rating,
+        comment: req.body.review
+    };
+
+    Product.findOneAndUpdate({'_id':req.body.proId},{ $push :{reviews:review} },(err,product)=>{
+        if (err) {
+            console.log("Error in adding review");
+            console.log(err);
+            return;
+        } else {
+            console.log("Review added successfully");
+            return;
+        }
+    });
+});
+
+router.post('/addrating',(req,res)=>{
+    console.log('Request Body');
+    console.log(req.body);
+
+    Product.find({'_id':req.body.proId},function(err,products){
+        if (err) {
+            console.log("Failed to find product");
+            console.log(err);
+            return;
+        } else {
+            for (let i=0;i<products.length;i++) {
+                let product = products[i];
+                let ratings = [0,0,0,0,0];
+                let denominator = 0;
+                let numerator = 0;
+                for (let j=0;j<5;j++) {
+                    ratings[j] = product.rating['val'+(j+1)];
+                    denominator += ratings[j];
+                    numerator += ratings[j]*(j+1);
+                    // console.log(ratings[j]+'*'+(j+1)+'='+(ratings[j]*(j+1))+' => '+numerator);
+                }
+                ratings[req.body.rating-1]++;
+                denominator++;
+                numerator+=parseInt(req.body.rating);
+                console.log("Numerator",numerator);
+                console.log("Denominator",denominator);
+                
+                let rating = {
+                    value: (numerator/denominator).toFixed(1),
+                    val5: ratings[4],
+                    val4: ratings[3],
+                    val3: ratings[2],
+                    val2: ratings[1],
+                    val1: ratings[0]
+                };
+
+                console.log("Rating");
+                console.log(rating);
+
+                Product.updateOne({'_id':req.body.proId},{rating:rating},function(err,doc){
+                    if (err) {
+                        console.log('Error in Updating the rating');
+                        console.log(err);
+                        return;
+                    } else {
+                        console.log('Rating updated successfully');
+                        return;
+                    }
+                })
+            }
+        }
+    });
+});
+
 router.get('/edit/:proId',(req,res)=>{
     // Edit product with given id
     Product.findById(req.params.proId,function(err,product){
