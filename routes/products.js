@@ -238,6 +238,8 @@ router.post('/addrating',(req,res)=>{
                 let numerator = 0;
                 for (let j=0;j<5;j++) {
                     ratings[j] = product.rating['val'+(j+1)];
+                    if (!ratings[j])
+                        ratings[j]=0;
                     denominator += ratings[j];
                     numerator += ratings[j]*(j+1);
                     // console.log(ratings[j]+'*'+(j+1)+'='+(ratings[j]*(j+1))+' => '+numerator);
