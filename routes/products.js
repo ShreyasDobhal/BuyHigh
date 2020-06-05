@@ -31,7 +31,7 @@ var upload = multer({
     storage: Storage
 }).single('thumbnail');
 
-router.get('/demo',(req,res)=>{
+router.get('/json',(req,res)=>{
     Product.find({},function(err,products) {
         console.log(products);
         res.json(products);

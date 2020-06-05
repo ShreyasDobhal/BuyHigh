@@ -1,0 +1,18 @@
+@import url('//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+
+x-star-rating {
+    font-family: 'Ionicons';
+    font-size: 48px;
+    display: inline-flex;
+    cursor: pointer;
+}
+
+x-star-rating > .star::after {
+    content: '\f3ae';
+    color: #848080;
+}
+
+x-star-rating > .star.full::after {
+    content: '\f2fc';
+    color: #d6bf33;
+}

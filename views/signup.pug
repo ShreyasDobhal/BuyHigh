@@ -30,7 +30,7 @@
                     <a class="nav-link" href='/home'>Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <div class="dropdown nav-item active">
+                    <div class="dropdown nav-item">
                         <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="/category/book">Books & Stationary</a>
@@ -58,7 +58,7 @@
                     <a class="nav-link" href="/contact">Contact Us <span class="sr-only">(current)</span></a>
                 </li>
 
-                
+
             </ul>
             <!-- class="col-md-6 mr-auto" -->
             <!-- <div class="input-group mb-3"> -->
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
+            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/user/signup'>Sign up</a>
 
         </div>
     </nav>
@@ -117,54 +117,34 @@
     <!-- End of Sign in Modal -->
 
     <!-- Spacer -->
-    <!-- <div class="navbarSpacer"></div> -->
+    <div class="navbarSpacer"></div>
 
-    <!-- Start of carousel -->
-    <div class="categoryImageHolder">
-        <img src=#{categoryImage} id="categoryImage" onerror=this.src="/static/images/category_page_default.jpg">
-        <img src=#{categoryImageSmall} id="categoryImageSmall" onerror=this.src="/static/images/category_page_small_default.jpg">
-    </div>
-    <!-- End of carousel -->
+    <h1 class="text-center my-5">Signup</h1>
 
-    <!-- Start of Heading -->
-    <div class="main-text hidden-xs my-5" id="carouselStaticText">
-        <div class="col-md-12 text-center">
-            <h1>#{categoryName}</h1>
-        </div>
-    </div>
-    <!-- End of Heading  -->
-
-    <!-- Start of Empty List Handler -->
-    if isEmpty == true
-        <div class="errorImageHolder">
-            <img src="/static/images/no-product-found.png" alt="">
-            <button id="btnExploreCategories" type="button" class="btn btn-primary btn-lg">Explore other categories</button>
-        </div>
-    <!-- End of Empty List Handler -->
-        
-    <!-- Start of Products Display Grid -->
-    <div class="thumbnailGroup">
-        each product,i in products
-            <div class="card" data-productId='#{product._id}' data-productDate='#{product.date}'>
-                <img src="/static/uploads/#{product.thumbnail}" class="card-img-top" alt="Failed to load image" onerror=this.src="/static/images/default.png">
-                <div class="card-body">
-                    <h5 class="card-title">#{product.title} <span class="badge">#{product.status}</span> </h5>
-                    <x-star-rating value='#{product.rating.value}' number='5' type='static' style="font-size: 22px;"></x-star-rating>
-                    <p><strong>Price : </strong> Rs. #{product.price}</p>
-                </div>
+    <!-- Start of Signup Form  -->
+    <div class="container">
+        <form action='/user/signup' method="POST">
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" name="name">
             </div>
+            <div class="form-group">
+                <label for="inputEmail">Email address</label>
+                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" name="email">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" name="password1">
+            </div>
+            <div class="form-group">
+                <label for="inputConfirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="inputConfirmPassword" name="password2">
+            </div>
+            
+            <button type="submit" class="btn btn-primary col-md-12 my-5">Submit</button>
+        </form>
     </div>
-    <!-- End of Products Display Gird  -->
-
-    
-
-
-    
-
-    <div class="spacer">
-
-    </div>
-
+    <!-- End of Signup Form  -->
 
 
 </body>

@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href='/static/styles/style.css'>
     <link rel="stylesheet" href='/static/styles/products-style.css'>
+    <link rel="stylesheet" href='/static/styles/StarRating.css'>
     <title>BuyHigh</title>
 </head>
 
@@ -83,6 +85,38 @@
     </div>
     <!-- End of Alert  -->
 
+    <!-- Start of Sign in Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Sign in Modal -->
+
     
     <!-- Start of Empty List Handler -->
     if isEmpty == true
@@ -92,7 +126,7 @@
         </div>
     <!-- End of Empty List Handler -->
     
-
+    
     <!-- Start of Products Display Grid -->
     <div class="thumbnailGroup">
         each product,i in products
@@ -100,10 +134,13 @@
                 <img src="/static/uploads/#{product.thumbnail}" class="card-img-top" alt="Failed to load image" onerror=this.src="/static/images/default.png">
                 <div class="card-body">
                     <h5 class="card-title">#{product.title} <span class="badge">#{product.status}</span> </h5>
+                    <x-star-rating value='#{product.rating.value}' number='5' type='static' style="font-size: 22px;"></x-star-rating>
                     <p><strong>Price : </strong> Rs. #{product.price}</p>
                 </div>
             </div>
     </div>
+
+    
     <!-- End of Products Display Gird  -->
 
     <!-- <h1>Products</h1>
@@ -126,5 +163,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="/static/javascript/client.js"></script>
 <script src="/static/javascript/products-client.js"></script>
+<script src="/static/javascript/StarRating.js"></script>
 
 </html>

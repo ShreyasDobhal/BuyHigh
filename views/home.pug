@@ -67,8 +67,28 @@
                     <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
                 </div>
             </div>
-            <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
+
+            if session.isSignedIn == true
+                <a class="navbar-brand" href='/home'>
+                    <img src="/static/images/dp#{session.userDP}.png" width="40" height="40" alt="" loading="lazy" id='dpImg'>
+                </a>
+                <ul class="navbar-nav mr-auto">
+                    
+                    <li>
+                        <div class="dropdown nav-item">
+                            <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#{session.userName} </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/category/watch">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/logout">Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+            else
+                <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
+                <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/user/signup'>Sign up</a>
 
         </div>
     </nav>
@@ -82,6 +102,38 @@
         </button>
     </div>
     <!-- End of Alert  -->
+
+    <!-- Start of Sign in Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/signin" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Sign in Modal -->
 
     <!-- Start of Carousel -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -194,7 +246,7 @@
 
 
     <!-- Start of Sign in Modal -->
-    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -218,11 +270,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- End of Sign in Modal -->
 
     <div class="spacer">

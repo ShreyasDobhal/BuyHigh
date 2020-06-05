@@ -19,6 +19,7 @@ let db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error:'));
 db.once('open',function(){
     // Connected
+    console.log("MongoDB running");
     console.log("We are connected !");
 });
 
@@ -41,13 +42,19 @@ app.set('view engine','pug');
 app.set('views',path.join(__dirname,'views'));
 
 
-// // Express Session
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: true,
-//     saveUninitialized: true,
-//     // cookie: {secure:true}
-// }));
+// Express Session
+app.use(session({
+    secret: 'secret key',
+    resave: false,
+    saveUninitialized: false,
+    // cookie: {secure:true}
+}));
+
+// Session Variables
+// signedIn
+// userName
+// userDP
+// userId
 
 // // Express Messages
 // app.use(require('connect-flash')());
@@ -67,11 +74,15 @@ app.use('/products',products);
 // /category
 let category = require('./routes/category.js');
 app.use('/category',category);
+// /user
+let user = require('./routes/user.js');
+app.use('/user',user);
 
 
 // END POINTS
 
 app.get('/',(req,res)=>{
+    // req.session.variableName
     res.send('Server is running . . . ');
 });
 
@@ -83,7 +94,13 @@ app.get('/home',(req,res)=>{
     //     alertShow:'show'
     // });
     // eval(require('locus'));
-    res.status(200).render('home.pug');
+    res.status(200).render('home.pug',{
+        session: {
+            isSignedIn: req.session.signedIn,
+            userName: req.session.userName,
+            userDP: req.session.userDP
+        }
+    });
 });
 
 app.get('/json',(req,res)=>{
