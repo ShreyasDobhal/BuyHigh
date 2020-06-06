@@ -14,6 +14,10 @@ let productSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    sellerId: {
+        type: String,
+        required: true
+    },
     body: {
         type: String,
         required: true

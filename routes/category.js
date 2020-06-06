@@ -41,7 +41,15 @@ router.get('/:category',(req,res)=>{
                     alertMessage: 'No Products Found',
                     alertType: 'alert-danger',
                     alertShow: 'show',
-                    isEmpty: true
+                    isEmpty: true,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
 
                 });
             } else {
@@ -52,7 +60,15 @@ router.get('/:category',(req,res)=>{
                     categoryImage: '/static/images/category_page_'+req.params.category+'.jpg',
                     categoryImageSmall: '/static/images/category_page_small_'+req.params.category+'.jpg',
                     categoryName: categoryMap[req.params.category],
-                    products: products
+                    products: products,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
 
                 });
             }

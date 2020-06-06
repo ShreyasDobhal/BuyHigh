@@ -5,6 +5,7 @@ const url = require('url');
 const router = express.Router();
 
 let User = require('../models/user');
+let Product = require('../models/product');
 
 router.get('/json',(req,res)=>{
     User.find({},function(err,users) {
@@ -14,7 +15,16 @@ router.get('/json',(req,res)=>{
 });
 
 router.get('/signup',(req,res)=>{
-    res.status(200).render("signup.pug");
+    res.status(200).render("signup.pug",{
+        session: {
+            isSignedIn: req.session.signedIn,
+            userName: req.session.userName,
+            userDP: req.session.userDP,
+            userId: req.session.userId,
+            cartSize: 0,
+            buyRequests: 0
+        }
+    });
     
 });
 
@@ -97,5 +107,38 @@ router.get('/logout',(req,res)=>{
     res.redirect('/home');
 });
 
+// TODO
+router.get('/products/:userId',(req,res)=>{
+    // View all the products
+    console.log("Products searched");
+    Product.find({}, function(err,products){
+        if (err) {
+            console.log("Error in displaying all products");
+            console.log(err);
+            res.send("Error");
+        } else {
+            console.log("Products are :");
+            console.log(products);
+            if (products.length==0) {
+                // Empty product list
+                res.status(200).render('products.pug',{
+                    products: products,
+                    alertMessage: '0 products found',
+                    alertType: 'alert-danger',
+                    alertShow: 'show',
+                    isEmpty: true
+                });
+            } else {
+                res.status(200).render('products.pug',{
+                    products: products,
+                    alertMessage: req.query.alertMessage,
+                    alertType: req.query.alertType,
+                    alertShow: req.query.alertShow
+                });
+            }
+            
+        }
+    });
+});
 
 module.exports = router;

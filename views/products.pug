@@ -68,12 +68,40 @@
                     <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
                 </div>
             </div>
-            <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
-            <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/signup'>Sign up</a>
+
+            if session.isSignedIn == true
+                <a class="navbar-brand" href='/home'>
+                    <img src="/static/images/dp#{session.userDP}.png" width="40" height="40" alt="" loading="lazy" id='dpImg'>
+                </a>
+                <ul class="navbar-nav mr-auto">
+                    
+                    <li>
+                        <div class="dropdown nav-item">
+                            <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#{session.userName} </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/category/watch">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/products/add">Add Product</a>
+                                <a class="dropdown-item" href="/user/products/#{session.userId}">Your Products</a>
+                                <a class="dropdown-item" href="/user/requests">Buy Requests <span class="badge badge-light"> #{session.buyRequests}</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/orders">Your Orders</a>
+                                <a class="dropdown-item" href="/user/cart">Your Cart <span class="badge badge-light"> #{session.cartSize}</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/logout">Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+            else
+                <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
+                <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/user/signup'>Sign up</a>
 
         </div>
     </nav>
     <!-- End of Nav bar -->
+
     <div class="navbarSpacer"></div>
 
     <!-- Start of Alert  -->

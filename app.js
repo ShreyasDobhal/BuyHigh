@@ -55,6 +55,8 @@ app.use(session({
 // userName
 // userDP
 // userId
+// cartSize
+// buyRequests
 
 // // Express Messages
 // app.use(require('connect-flash')());
@@ -98,7 +100,10 @@ app.get('/home',(req,res)=>{
         session: {
             isSignedIn: req.session.signedIn,
             userName: req.session.userName,
-            userDP: req.session.userDP
+            userDP: req.session.userDP,
+            userId: req.session.userId,
+            cartSize: 0,
+            buyRequests: 0
         }
     });
 });

@@ -56,14 +56,30 @@ router.get('/',(req,res)=>{
                     alertMessage: '0 products found',
                     alertType: 'alert-danger',
                     alertShow: 'show',
-                    isEmpty: true
+                    isEmpty: true,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
                 });
             } else {
                 res.status(200).render('products.pug',{
                     products: products,
                     alertMessage: req.query.alertMessage,
                     alertType: req.query.alertType,
-                    alertShow: req.query.alertShow
+                    alertShow: req.query.alertShow,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
                 });
             }
             
@@ -82,7 +98,15 @@ router.get('/view/:proId',(req,res)=>{
                 alertMessage: 'No such product found',
                 alertType: 'alert-danger',
                 alertShow: 'show',
-                isEmpty: true
+                isEmpty: true,
+                session: {
+                    isSignedIn: req.session.signedIn,
+                    userName: req.session.userName,
+                    userDP: req.session.userDP,
+                    userId: req.session.userId,
+                    cartSize: 0,
+                    buyRequests: 0
+                }
             });
         } else {
             console.log(product);
@@ -109,7 +133,15 @@ router.get('/view/:proId',(req,res)=>{
                 rating3Cnt: ratePercentage[2],
                 rating2Cnt: ratePercentage[1],
                 rating1Cnt: ratePercentage[0],
-                isCommentEmpty: isCommentEmpty
+                isCommentEmpty: isCommentEmpty,
+                session: {
+                    isSignedIn: req.session.signedIn,
+                    userName: req.session.userName,
+                    userDP: req.session.userDP,
+                    userId: req.session.userId,
+                    cartSize: 0,
+                    buyRequests: 0
+                }
             });
         }
     });
@@ -135,11 +167,27 @@ router.get('/search/:tag',(req,res)=>{
                     alertMessage: 'No product matched your search',
                     alertType: 'alert-danger',
                     alertShow: 'show',
-                    isEmpty: true
+                    isEmpty: true,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
                 });
             } else {
                 res.status(200).render('products.pug',{
-                    products:products
+                    products:products,
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
                 })
             }
             
@@ -149,7 +197,16 @@ router.get('/search/:tag',(req,res)=>{
 
 router.get('/add',(req,res)=>{
     // Add a product
-    res.status(200).render('add-product.pug');
+    res.status(200).render('add-product.pug',{
+        session: {
+            isSignedIn: req.session.signedIn,
+            userName: req.session.userName,
+            userDP: req.session.userDP,
+            userId: req.session.userId,
+            cartSize: 0,
+            buyRequests: 0
+        }
+    });
 });
 
 
@@ -288,7 +345,15 @@ router.get('/edit/:proId',(req,res)=>{
             // let products = [product]
             res.status(200).render('edit-product.pug',{
                 product: product,
-                categoryName: categoryMap[product.category]
+                categoryName: categoryMap[product.category],
+                session: {
+                    isSignedIn: req.session.signedIn,
+                    userName: req.session.userName,
+                    userDP: req.session.userDP,
+                    userId: req.session.userId,
+                    cartSize: 0,
+                    buyRequests: 0
+                }
             });
         }
     });

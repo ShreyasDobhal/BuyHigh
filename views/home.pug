@@ -80,6 +80,13 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="/category/watch">Profile</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/products/add">Add Product</a>
+                                <a class="dropdown-item" href="/user/products/#{session.userId}">Your Products</a>
+                                <a class="dropdown-item" href="/user/requests">Buy Requests <span class="badge badge-light"> #{session.buyRequests}</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/orders">Your Orders</a>
+                                <a class="dropdown-item" href="/user/cart">Your Cart <span class="badge badge-light"> #{session.cartSize}</span></a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/user/logout">Log Out</a>
                             </div>
                         </div>
@@ -123,7 +130,7 @@
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
                 <div class="modal-footer">
