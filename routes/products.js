@@ -197,16 +197,32 @@ router.get('/search/:tag',(req,res)=>{
 
 router.get('/add',(req,res)=>{
     // Add a product
-    res.status(200).render('add-product.pug',{
-        session: {
-            isSignedIn: req.session.signedIn,
-            userName: req.session.userName,
-            userDP: req.session.userDP,
-            userId: req.session.userId,
-            cartSize: 0,
-            buyRequests: 0
-        }
-    });
+
+    // Checking if user is logged in 
+    if (req.session.signedIn) {
+        res.status(200).render('add-product.pug',{
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: 0,
+                buyRequests: 0
+            }
+        });
+    } else {
+        res.status(200).render('signin-fallback.pug',{
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: 0,
+                buyRequests: 0
+            }
+        });
+    }
+    
 });
 
 
@@ -336,27 +352,43 @@ router.post('/addrating',(req,res)=>{
 
 router.get('/edit/:proId',(req,res)=>{
     // Edit product with given id
-    Product.findById(req.params.proId,function(err,product){
-        if (err) {
-            console.log("Error in searching");
-            return;
-        } else {
-            console.log(product);
-            // let products = [product]
-            res.status(200).render('edit-product.pug',{
-                product: product,
-                categoryName: categoryMap[product.category],
-                session: {
-                    isSignedIn: req.session.signedIn,
-                    userName: req.session.userName,
-                    userDP: req.session.userDP,
-                    userId: req.session.userId,
-                    cartSize: 0,
-                    buyRequests: 0
-                }
-            });
-        }
-    });
+
+    if (req.session.signedIn) {
+        Product.findById(req.params.proId,function(err,product){
+            if (err) {
+                console.log("Error in searching");
+                return;
+            } else {
+                console.log(product);
+                // let products = [product]
+                res.status(200).render('edit-product.pug',{
+                    product: product,
+                    categoryName: categoryMap[product.category],
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
+                });
+            }
+        });
+    } else {
+        res.status(200).render('signin-fallback.pug',{
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: 0,
+                buyRequests: 0
+            }
+        });
+    }
+
+    
 });
 
 router.post('/edit/:proId',(req,res)=>{
