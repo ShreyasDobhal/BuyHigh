@@ -2,6 +2,6 @@
     display: flex;
 }
 
-.editControlsContainer a {
-
+.card .viewBtn{
+    margin: 5px 0px;
 }

@@ -277,22 +277,3 @@ app.listen(port,()=>{
     console.log(`The application started successfully on port ${port}`);
 });
 
-
-// Use in JQuery 
-
-// $(document).ready(function(){
-//     $('.deleteBtn').on('click',function(e){
-//         $target = $(e.$target);
-//         console.log($target.attr('data-id'));
-//         $.ajax({
-//             type:'DELETE',
-//             url:'/delete/product/'+IDBCursor,
-//             success: function(res) {
-//                 window.location.href='/';
-//             },
-//             error: function(err) {
-//                 console.log(err);
-//             }
-//         });
-//     });
-// });

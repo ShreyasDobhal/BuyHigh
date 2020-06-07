@@ -427,16 +427,16 @@ router.post('/edit/:proId',(req,res)=>{
 
 router.delete('/delete/:proId',(req,res)=>{
     // DELETE method to handle delete request
-    console.log("Request Body");
-    console.log(req.body);
 
-    Product.remove({'_id':req.params.proId},(err,product)=>{
+    console.log("Deleting product");
+
+    Product.deleteOne({'_id':req.params.proId},(err,product)=>{
         if (err) {
             console.log("Error in deleting");
             console.log(err);
             return;
         } else {
-            res.redirect('/products');
+            return;
         }
     });
 });
