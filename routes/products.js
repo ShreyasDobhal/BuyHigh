@@ -241,7 +241,8 @@ router.post('/add',upload,(req,res)=>{
 
     let product = new Product();
     product.title = req.body.title;
-    product.seller = req.body.seller;
+    product.seller = req.session.userName;
+    product.sellerId = req.session.userId;
     product.body = req.body.description;
     product.price = req.body.price;
     product.status = req.body.status;
@@ -354,14 +355,17 @@ router.get('/edit/:proId',(req,res)=>{
     // Edit product with given id
 
     if (req.session.signedIn) {
+
         Product.findById(req.params.proId,function(err,product){
             if (err) {
                 console.log("Error in searching");
                 return;
             } else {
+                let isOwnPage = (req.session.userId == product.sellerId);
                 console.log(product);
                 // let products = [product]
                 res.status(200).render('edit-product.pug',{
+                    isOwnPage: isOwnPage,
                     product: product,
                     categoryName: categoryMap[product.category],
                     session: {

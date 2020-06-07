@@ -13,6 +13,96 @@
 
 <body>
 
+    <!-- Start of Nav bar  -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href='/home'>
+            <img src="/static/images/logo.png" width="30" height="30" alt="" loading="lazy" id='logoImg'>
+        </a>
+        <a class="navbar-brand" href='/home'>BuyHigh</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href='/home'>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <div class="dropdown nav-item">
+                        <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/category/book">Books & Stationary</a>
+                            <a class="dropdown-item" href="/category/beauty">Beauty Products</a>
+                            <a class="dropdown-item" href="/category/clothing">Clothing</a>
+                            <a class="dropdown-item" href="/category/computer">Mobile & Computer</a>
+                            <a class="dropdown-item" href="/category/garden">Garden & Outdoors</a>
+                            <a class="dropdown-item" href="/category/furniture">Furniture</a>
+                            <a class="dropdown-item" href="/category/kitchen">Home & Kitchen</a>
+                            <a class="dropdown-item" href="/category/shoes">Shoes & Handbags</a>
+                            <a class="dropdown-item" href="/category/toys">Toys</a>
+                            <a class="dropdown-item" href="/category/watch">Watches & Wallets</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/category/other">Other</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='/products'>Products <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href='/about'>About <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us <span class="sr-only">(current)</span></a>
+                </li>
+
+                
+            </ul>
+            <!-- class="col-md-6 mr-auto" -->
+            <!-- <div class="input-group mb-3"> -->
+            <div class="input-group col-md-5 container-sm  mr-auto sm-my-5">
+                <input id="txtSearch" type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary fa fa-search" type="button" id="btnSearch"></button>
+                </div>
+            </div>
+
+            if session.isSignedIn == true
+                <a class="navbar-brand" href='/home'>
+                    <img src="/static/images/dp#{session.userDP}.png" width="40" height="40" alt="" loading="lazy" id='dpImg'>
+                </a>
+                <ul class="navbar-nav mr-auto">
+                    
+                    <li>
+                        <div class="dropdown nav-item">
+                            <button class="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" style="background: none; border: none; outline: none;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#{session.userName} </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/category/watch">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/products/add">Add Product</a>
+                                <a class="dropdown-item" href="/user/products/#{session.userId}">Your Products</a>
+                                <a class="dropdown-item" href="/user/requests">Buy Requests <span class="badge badge-light"> #{session.buyRequests}</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/orders">Your Orders</a>
+                                <a class="dropdown-item" href="/user/cart">Your Cart <span class="badge badge-light"> #{session.cartSize}</span></a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/user/logout">Log Out</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+            else
+                <button class="btn btn-outline-secondary mx-2" id="btnSignIn">Sign in</button>
+                <a class="btn btn-outline-primary my-2 my-sm-0 mx-2" id="btnSignUp" href='/user/signup'>Sign up</a>
+
+        </div>
+    </nav>
+    <!-- End of Nav bar -->
+    <div class="navbarSpacer"></div>
+
+
     <!-- Start of Alert  -->
     <div class="alert #{alertType} alert-dismissible fade #{alertShow}" role="alert">
         <span>#{alertMessage}</span>
@@ -22,12 +112,41 @@
     </div>
     <!-- End of Alert  -->
 
-    <div class="main-text hidden-xs" id="carouselStaticText">
-        <div class="col-md-12 text-center">
-            <h1>BuyHigh</h1>
-            <h3>Add your product</h3>
+    <!-- Start of Sign in Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/signin" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
+            </div>
         </div>
     </div>
+    <!-- End of Sign in Modal -->
+
+
+    <h1 class='text-center'>Add Product</h1>
+    
     <div class="container col-md-6">
         <form action="/products/add" method="POST" enctype="multipart/form-data">
             <!-- <form action="/addproduct"> -->
@@ -35,10 +154,10 @@
                 <label for="inputTitle">Product Name</label>
                 <input type="text" class="form-control" id="inputTitle" name="title">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="inputSeller">Product Seller</label>
                 <input type="text" class="form-control" id="inputSeller" name="seller">
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="inputDescription">Product Description</label>
                 <textarea class="form-control" id="inputDescription" rows="3" name="description"></textarea>

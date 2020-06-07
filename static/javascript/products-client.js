@@ -37,6 +37,8 @@ $(document).ready(function(){
                     $productStatus.eq(0).addClass('badge-primary');
                 }
             }
+        } else {
+            $productStatus.eq(0).addClass('badge-secondary');
         }
     }
     
