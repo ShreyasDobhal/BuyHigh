@@ -34,8 +34,39 @@ $(document).ready(function() {
                     rating: rating
                 },
                 success: function(result) {
+                    alert('Your feedback has been added');
                     window.location.reload();
+                },
+                error: function(err) {
+                    alert('Failed to add your feedback');
                 }
             });
     });
+
+
+    $('#btnAddCart').on('click',function(){
+        console.log('Add to Card clicked');
+        
+        let $product = $('#objProduct');
+        $.ajax({
+            url: "/user/addcart",
+            type: "POST",
+            data: {
+                productId: $product.attr('data-id'),
+                productName: $product.attr('data-title'),
+                sellerId: $product.attr('data-sellerId'),
+                sellerName: $product.attr('data-seller'),
+                price: $product.attr('data-price')
+            },
+            success: function(result) {
+                alert('Added to cart');
+                // window.location.reload();
+            },
+            error: function(err) {
+                alert('Failed to add to cart');
+            }
+        });
+            
+    });
+
 });

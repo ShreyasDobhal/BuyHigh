@@ -159,4 +159,34 @@ router.get('/products/:userId',(req,res)=>{
     });
 });
 
+
+router.post('/addcart',(req,res)=>{
+    // Add product to cart
+    console.log(req.body);
+    
+    let cartItem = {
+        productId: req.body.productId,
+        productName: req.body.productName,
+        sellerId: req.body.sellerId,
+        sellerName: req.body.sellerName,
+        price: req.body.price
+    }
+
+    if (req.session.signedIn) {
+        User.updateOne({_id:req.session.userId},{$push :{cart:cartItem}},function(err,user){
+            if (err) {
+                console.log("Error in adding product to cart");
+                console.log(err);
+                res.status(500).send("Failed to add product to element");
+            } else {
+                res.status(200).send("Product Successfully added to cart");
+            }
+        });
+    } else {
+        res.status(401).send("Not signed in");
+    }
+});
+
+
+
 module.exports = router;

@@ -28,6 +28,15 @@ let userSchema = mongoose.Schema({
             country: String,
             zincode: Number
         }
+    ],
+    cart: [
+        {
+            productId: String,
+            productName: String,
+            sellerId: String,
+            sellerName: String,
+            price: Number
+        }
     ]
 
 });

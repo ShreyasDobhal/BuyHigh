@@ -287,10 +287,10 @@ router.post('/addreview',(req,res)=>{
         if (err) {
             console.log("Error in adding review");
             console.log(err);
-            return;
+            res.status(500).send('Error in adding review');
         } else {
             console.log("Review added successfully");
-            return;
+            res.status(200).send('Review added successfully');
         }
     });
 });
@@ -303,7 +303,7 @@ router.post('/addrating',(req,res)=>{
         if (err) {
             console.log("Failed to find product");
             console.log(err);
-            return;
+            res.status(500).send('Error in finding product');
         } else {
             for (let i=0;i<products.length;i++) {
                 let product = products[i];
@@ -340,10 +340,10 @@ router.post('/addrating',(req,res)=>{
                     if (err) {
                         console.log('Error in Updating the rating');
                         console.log(err);
-                        return;
+                        res.status(500).send('Error occurred while updating the rating');
                     } else {
                         console.log('Rating updated successfully');
-                        return;
+                        res.status(200).send('Rating updated successfully');
                     }
                 })
             }

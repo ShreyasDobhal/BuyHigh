@@ -127,7 +127,7 @@
         <!-- Start of Products Display Card -->
 
         <!-- Product Information Container  -->
-        <div id="objProduct" data-id='#{product._id}'></div>
+        <div id="objProduct" data-id='#{product._id}' data-title='#{product.title}' data-seller='#{product.seller}' data-sellerId='#{product.sellerId}' data-price='#{product.price}'></div>
         <div class="displayContainer">
             <div class="imageContainer">
                 <img src="/static/uploads/#{product.thumbnail}" alt="" onerror=this.src="/static/images/default.png">
