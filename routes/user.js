@@ -82,7 +82,7 @@ router.post('/signin',(req,res)=>{
         if (err) {
             console.log("Error in finding user");
             console.log(err);
-            return;
+            res.status(401).send('Invalid credentials');
         } else {
             console.log('Users : ');
             console.log(users);
@@ -93,19 +93,19 @@ router.post('/signin',(req,res)=>{
                 req.session.userName = currentUser.name;
                 req.session.userDP = currentUser.userDP;
                 req.session.userId = currentUser._id;
-                res.redirect('/home');
+                res.status(200).send('Signed in successfully');
             } else {
                 console.log("No such user found");
-                return;
+                res.status(401).send('Invalid credentials');
             }
         }
     });
 });
 
-router.get('/logout',(req,res)=>{
+router.post('/logout',(req,res)=>{
     req.session.signedIn = false;
     req.session.userId = undefined;
-    res.redirect('/home');
+    res.status(200).send('Logged out successfully');
 });
 
 // TODO
@@ -163,7 +163,7 @@ router.get('/products/:userId',(req,res)=>{
 router.post('/addcart',(req,res)=>{
     // Add product to cart
     console.log(req.body);
-    
+
     let cartItem = {
         productId: req.body.productId,
         productName: req.body.productName,

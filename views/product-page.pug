@@ -88,7 +88,7 @@
                                 <a class="dropdown-item" href="/user/orders">Your Orders</a>
                                 <a class="dropdown-item" href="/user/cart">Your Cart <span class="badge badge-light"> #{session.cartSize}</span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/user/logout">Log Out</a>
+                                <a id="btnLogout" class="dropdown-item" href="#">Log Out</a>
                             </div>
                         </div>
                     </li>
@@ -261,15 +261,15 @@
                 <div class="modal-body">
                     <form action="/user/signin" method="POST">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                            <label for="modalEmailInput">Email address</label>
+                            <input type="email" class="form-control" id="modalEmailInput" aria-describedby="emailHelp" name="email">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                            <label for="modalPasswordInput">Password</label>
+                            <input type="password" class="form-control" id="modalPasswordInput" name="password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
+                    <button id="btnLogin" class="btn btn-primary">Login</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

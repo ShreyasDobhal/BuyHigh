@@ -7,6 +7,46 @@ $(document).ready(function() {
         $('#signInModal').modal('show');
     });
 
+    $('#btnLogin').on('click',function() {
+        console.log('Log in button clicked');
+
+        let txtEmail = $('#modalEmailInput').val();
+        let txtPassword = $('#modalPasswordInput').val();
+
+        $.ajax({
+            url: "/user/signin",
+            type: "POST",
+            data: {
+                email: txtEmail,
+                password: txtPassword
+            },
+            success: function(result) {
+                window.location.reload();
+            },
+            error: function(err) {
+                alert('Failed to sign in');
+            }
+        });
+    });
+
+    $('#btnLogout').on('click',function(){
+        console.log('Logout button clicked');
+
+        $.ajax({
+            url: "/user/logout",
+            type: "POST",
+            data: {
+                
+            },
+            success: function(result) {
+                window.location.reload();
+            },
+            error: function(err) {
+                alert('Failed to logout');
+            }
+        });
+    });
+
     $('#btnExploreCategories').on('click',function() {
         console.log('Explore more categories button clicked');
         window.location.href = '/home';
