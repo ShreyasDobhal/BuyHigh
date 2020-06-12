@@ -277,8 +277,8 @@ router.post('/addreview',(req,res)=>{
     // console.log(req.body.proId);
 
     let review = {
-        userName: req.body.userName,
-        userDP: req.body.userDP,
+        userName: req.session.userName,
+        userDP: req.session.userDP,
         rating: req.body.rating,
         comment: req.body.review
     };

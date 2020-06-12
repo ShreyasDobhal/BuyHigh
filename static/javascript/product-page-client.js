@@ -13,8 +13,8 @@ $(document).ready(function() {
                 type: "POST",
                 data: {
                     proId: $('#objProduct').attr('data-id'),
-                    userName: 'user'+Math.floor(Math.random()*100),
-                    userDP: (Math.floor(Math.random()*5)+1),
+                    // userName: 'user'+Math.floor(Math.random()*100),
+                    // userDP: (Math.floor(Math.random()*5)+1),
                     rating: rating,
                     review: review
                 },

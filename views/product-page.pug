@@ -147,9 +147,12 @@
                     <h5 class="card-header">Payment</h5>
                     <div class="card-body">
                         <h5 class="card-title">Get this product now</h5>
-                        <!-- <p class="card-text">Get this product now</p> -->
-                        <btn id="btnAddCart" class="btn btn-primary">Add to Cart</btn>
-                        <a href="#" class="btn btn-primary">Check Out</a>
+                        if session.isSignedIn == true
+                            <btn id="btnAddCart" class="btn btn-primary">Add to Cart</btn>
+                            <a href="#" class="btn btn-primary">Check Out</a>
+                        else 
+                            <btn class="btn btn-secondary disabled">Add to Cart</btn>
+                            <a href="#" class="btn btn-secondary disabled">Check Out</a>
                     </div>
                 </div>
             </div>
@@ -207,7 +210,11 @@
                         <textarea id="inputReview" class="form-control" id="txtFeedback" rows="6" placeholder="Your feedback"></textarea>
                     </div>
                 </form>
-                <button id="btnAddReview" class="btn btn-primary btn-lg mx-3">Add Review</button>
+                if session.isSignedIn == true
+                    <button id="btnAddReview" class="btn btn-primary btn-lg mx-3">Add Review</button>
+                else 
+                    <button class="btn btn-secondary disabled btn-lg mx-3">Add Review</button>
+
             </div>
         </div>
 
