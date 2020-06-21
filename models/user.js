@@ -35,7 +35,8 @@ let userSchema = mongoose.Schema({
             productName: String,
             sellerId: String,
             sellerName: String,
-            price: Number
+            price: Number,
+            productThumbnail: String
         }
     ]
 

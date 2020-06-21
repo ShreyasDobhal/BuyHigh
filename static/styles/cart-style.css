@@ -1,0 +1,118 @@
+.productHolder {
+    width: 1200px;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: max-content auto 100px;
+    margin: 25px auto;
+    border: 2px solid #d6d6d6;
+    border-radius: 25px;
+    box-shadow: 10px 10px 10px #cac4c4;
+}
+
+.productHolder img {
+    width: 15rem;
+    margin: 50px;
+    border: 2px solid #bfbfbf;
+}
+
+.productHolder .detailsContainer p {
+    font-size: 20px;
+    position: relative;
+    top: -1px;
+    left: 1px;
+}
+
+.productHolder .detailsContainer h3 {
+    font-size: 25px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.productHolder x-star-rating {
+    position: relative;
+    top: -10px;
+    left: 10px;
+    margin-bottom: 20px;
+}
+
+.productHolder .deleteBtn {
+    font-size: 3rem;
+    background: none;
+    padding: 10px;
+    border: 1px solid #8e8a8a;
+    border-radius: 14px;
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    margin: 15px;
+}
+
+.productHolder .deleteBtn:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.listContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.listContainer #buyBtn {
+    margin: auto;
+    width: 500px;
+    max-width: 80%;
+    padding: 21px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+
+/* For smaller screens */
+@media only screen and (max-width:1050px) and (min-width:500px) {
+    
+}
+
+/* For even smaller screens */
+@media only screen and (max-width:500px)  {
+    .productHolder {
+        margin: 15px auto;
+        grid-template-columns: max-content auto 48px;
+    }
+    
+    .productHolder img {
+        width: 9rem;
+        margin: auto 13px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: none;
+    }
+    
+    .productHolder .detailsContainer p {
+        font-size: 14px;
+        position: relative;
+        top: -9px;
+        left: 10px;
+    }
+    
+    .productHolder .detailsContainer h3 {
+        margin-top: 5px;
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    .productHolder x-star-rating {
+        position: relative;
+        top: -10px;
+        left: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .productHolder .deleteBtn {
+        font-size: 20px;
+        padding: 4px;
+    }
+
+    .listContainer #buyBtn {
+        max-width: 61%;
+        padding: 7px;
+    }
+}

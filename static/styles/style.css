@@ -29,13 +29,11 @@
 /* Thumbnail Cards  */
 .thumbnailGroup{
     display: grid;
-    /* border: 2px solid blue; */
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 /* Cards */
 .card{
-    /* border: 2px solid red; */
     margin: 20px;
 }
 .card img{
@@ -45,6 +43,16 @@
     width: 100%;
     margin: 9px;
 }
+
+/* Link Spans */
+.sellerSpan {
+    color: #3b6796;
+}
+
+.productSpan {
+    color: #b56f3b;
+}
+
 
 /* For large screen  */
 @media only screen and (min-width:576px)  {
@@ -80,7 +88,6 @@
 .errorImageHolder {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     margin-top: 75px;
     margin-bottom: 75px;
@@ -105,5 +112,4 @@
 
 .spacer{
     height: 600px;
-    /* border: 2px solid red; */
 }

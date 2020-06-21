@@ -160,6 +160,52 @@ router.get('/products/:userId',(req,res)=>{
 });
 
 
+router.get('/cart',(req,res)=>{
+
+    if (req.session.signedIn) {
+
+        User.find({_id:req.session.userId},function(err,users){
+            if (!users || users.length==0) {
+                res.status(500).send('Error in finding user information');
+            } else {
+                let currentUser = users[0];
+                let isCartEmpty = false;
+                let cart = currentUser.cart;
+                console.log(cart);
+                if (!currentUser.cart || currentUser.cart.length==0)
+                isCartEmpty=true;
+                console.log(isCartEmpty);
+                res.status(200).render('cart.pug',{
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        isCartEmpty: isCartEmpty,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        user: users[0],
+                        cart: cart,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
+                });
+            }
+        });
+
+        
+    } else {
+        res.status(200).render('signin-fallback.pug',{
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: 0,
+                buyRequests: 0
+            }
+        });
+    }
+});
+
 router.post('/addcart',(req,res)=>{
     // Add product to cart
     console.log(req.body);
@@ -167,6 +213,7 @@ router.post('/addcart',(req,res)=>{
     let cartItem = {
         productId: req.body.productId,
         productName: req.body.productName,
+        productThumbnail: req.body.productThumbnail,
         sellerId: req.body.sellerId,
         sellerName: req.body.sellerName,
         price: req.body.price

@@ -54,6 +54,7 @@ $(document).ready(function() {
             data: {
                 productId: $product.attr('data-id'),
                 productName: $product.attr('data-title'),
+                productThumbnail: $product.attr('data-thumbnail'),
                 sellerId: $product.attr('data-sellerId'),
                 sellerName: $product.attr('data-seller'),
                 price: $product.attr('data-price')
