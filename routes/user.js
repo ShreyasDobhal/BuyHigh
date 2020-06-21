@@ -234,6 +234,20 @@ router.post('/addcart',(req,res)=>{
     }
 });
 
+router.delete('/product',(req,res)=>{
+    // db.users.updateOne({_id:ObjectId('5eda90edcd98411df525d4e1')},{$pull : {'cart': {_id:ObjectId('5ee3915409304314adc77d5c')}}})
+
+    User.updateOne({_id:req.session.userId},{$pull: {cart:{productId:req.body.productId}} },function(err,user) {
+        if (err) {
+            console.log('Error in deleting product');
+            console.log(err);
+            res.status(500).send('Failed to removed product from cart');
+        } else {
+            res.status(200).send('Product Removed from cart successfully');
+        }
+    });
+})
+
 
 
 module.exports = router;
