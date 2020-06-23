@@ -27,6 +27,37 @@ $(document).ready(function() {
 
         // TODO Add product to orders
         let userId = $(this).attr('data-userId');
-        console.log(userId);
+        // let userCart = $(this).attr('data-userCart');
+        // console.log(userId);
+
+        $.ajax({
+            url: "/user/addorder",
+            type: "POST",
+            data: {
+                userId: userId
+                // orders: userCart
+            },
+            success: function(result) {
+                
+                console.log('Successfully added products to orders');
+
+                $.ajax({
+                    url: "/user/clearcart",
+                    type: "DELETE",
+                    data: {},
+                    success: function(result) {
+                        alert('Product added to orders successfully');
+                        window.location.reload();
+                    },
+                    error: function(err) {
+                        alert('Failed to remove items from cart');
+                    }
+                });
+            },
+            error: function(err) {
+                alert('Failed to add products to orders');
+            }
+        });
+
     });
 });

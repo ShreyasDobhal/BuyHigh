@@ -116,7 +116,7 @@
     
 
 
-    if session.isCartEmpty == true
+    if session.isOrderEmpty == true
         <!-- Start of Empty Handler -->
         <div class="errorImageHolder">
             <img src="/static/images/empty-cart.png" alt="">
@@ -125,19 +125,21 @@
         <!-- End of Empty Handler -->
     else
         <!-- Start of Products Display Container -->
+        <h2 class="text-center">Order History</h2>
         <div class="listContainer">
-            each product,i in session.cart
+            each order,i in session.orders
                 <div class="productHolder">
-                    <img src="/static/uploads/#{product.productThumbnail}" class="card-img-top" alt="Failed to load image" onerror=this.src="/static/images/default.png">
+                    <img src="/static/uploads/#{order.productThumbnail}" class="card-img-top" alt="Failed to load image" onerror=this.src="/static/images/default.png">
                     <div class='detailsContainer'>
-                        <h3><span class="productSpan" data-productId='#{product.productId}'>#{product.productName}</span></h3>
-                        <x-star-rating value='#{product.rating}' number='5' type='static' style="font-size: 20px;"></x-star-rating>
-                        <p>Seller : <span class="sellerSpan" data-sellerId='#{product.sellerId}'>#{product.sellerName}</span></p>
-                        <p>Price : #{product.price}</p>
+                        <h3><span class="productSpan" data-productId='#{order.productId}'>#{order.productName}</span></h3>
+                        <x-star-rating value='#{order.rating}' number='5' type='static' style="font-size: 20px;"></x-star-rating>
+                        <p>Seller : <span class="sellerSpan" data-sellerId='#{order.sellerId}'>#{order.sellerName}</span></p>
+                        <p>Price : #{order.price}</p>
+                        <p>Date : #{order.date}</p>
                     </div>
-                    <button class="fa fa-trash-o deleteBtn" data-productId="#{product.productId}"></button>
+                    <!-- <button class="fa fa-trash-o deleteBtn" data-productId="#{order.productId}"></button> -->
                 </div>
-            <button class="btn btn-primary" id="buyBtn" data-userId='#{session.userId}' data-userCart='#{session.cart}'>Buy Now</button>
+            
         </div>
 
     
@@ -182,7 +184,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script src="/static/javascript/client.js"></script>
-<script src="/static/javascript/cart-client.js"></script>
+<!-- <script src="/static/javascript/cart-client.js"></script> -->
 <script src="/static/javascript/StarRating.js"></script>
 
 </html>

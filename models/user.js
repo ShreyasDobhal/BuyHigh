@@ -36,6 +36,7 @@ let userSchema = mongoose.Schema({
             sellerId: String,
             sellerName: String,
             price: Number,
+            rating: Number,
             productThumbnail: String
         }
     ]

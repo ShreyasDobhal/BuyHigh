@@ -6,6 +6,7 @@ const router = express.Router();
 
 let User = require('../models/user');
 let Product = require('../models/product');
+let Order = require('../models/order');
 
 router.get('/json',(req,res)=>{
     User.find({},function(err,users) {
@@ -216,7 +217,8 @@ router.post('/addcart',(req,res)=>{
         productThumbnail: req.body.productThumbnail,
         sellerId: req.body.sellerId,
         sellerName: req.body.sellerName,
-        price: req.body.price
+        price: req.body.price,
+        rating: req.body.rating
     }
 
     if (req.session.signedIn) {
@@ -234,8 +236,25 @@ router.post('/addcart',(req,res)=>{
     }
 });
 
+router.delete('/clearcart',(req,res)=>{
+    // Clear cart
+    
+    if (req.session.signedIn) {
+        User.updateOne({_id:req.session.userId},{$set :{cart:[]}},function(err,user){
+            if (err) {
+                console.log("Error in clearing cart");
+                console.log(err);
+                res.status(500).send("Failed to clear cart");
+            } else {
+                res.status(200).send("Cart successfully cleared");
+            }
+        });
+    } else {
+        res.status(401).send("Not signed in");
+    }
+});
+
 router.delete('/product',(req,res)=>{
-    // db.users.updateOne({_id:ObjectId('5eda90edcd98411df525d4e1')},{$pull : {'cart': {_id:ObjectId('5ee3915409304314adc77d5c')}}})
 
     User.updateOne({_id:req.session.userId},{$pull: {cart:{productId:req.body.productId}} },function(err,user) {
         if (err) {
@@ -248,6 +267,100 @@ router.delete('/product',(req,res)=>{
     });
 })
 
+router.get('/orders',(req,res)=>{
+
+    if (req.session.signedIn) {
+
+        Order.find({buyerId:req.session.userId},function(err,orders){
+            if (err) {
+                res.status(500).send("Error in showing orders");
+            } else {
+                let isOrderEmpty = false;
+                if (!orders || orders.length==0)
+                    isOrderEmpty = true;
+                res.status(200).render('orders.pug',{
+                    session: {
+                        isSignedIn: req.session.signedIn,
+                        isOrderEmpty: isOrderEmpty,
+                        userName: req.session.userName,
+                        userDP: req.session.userDP,
+                        userId: req.session.userId,
+                        orders: orders,
+                        cartSize: 0,
+                        buyRequests: 0
+                    }
+                });
+            }
+        });
+
+        
+    } else {
+        res.status(200).render('signin-fallback.pug',{
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: 0,
+                buyRequests: 0
+            }
+        });
+    }
+});
+
+router.post('/addorder',(req,res)=>{
+    // Add product to cart
+    console.log("Adding to order");
+    console.log(req.body);
+    // console.log(req.body.orders);
+    if (req.session.signedIn) {
+
+        User.find({_id:req.session.userId}).then(function(user) {
+
+            let currentUser = user[0];
+            let cart = currentUser.cart;
+            let orders = [];
+
+            for (let i=0;i<cart.length;i++) {
+                orders.push({
+                    productId: cart[i].productId,
+                    productName: cart[i].productName,
+                    productThumbnail: cart[i].productThumbnail,
+                    sellerId: cart[i].sellerId,
+                    sellerName: cart[i].sellerName,
+                    buyerId: req.session.userId,
+                    buyerName: req.session.userName,
+                    price: cart[i].price,
+                    rating: cart[i].rating,
+                    date: new Date()
+                });
+            }
+            
+            console.log("Orders list : ");
+            console.log(orders);
+
+            Order.insertMany(orders,function(err,order){
+                if (err) {
+                    console.log("Error in buying products");
+                    console.log(err);
+                    res.status(500).send("Failed to buy products");
+                } else {
+                    res.status(200).send("Product Added to orders successfully");
+                }
+            });
+
+        }).catch(function() {
+            console.log('Invalid user');
+            res.status(401).send("Invalid user");
+        });
+
+    } else {
+        res.status(401).send("Not signed in");
+    }
+});
+
 
 
 module.exports = router;
+
+//[{"_id": "5ef1c29f8a3b0c7252b0e3d2","productId": "5edd34a736c4e230749d6ebb","productName": "User-Sample","productThumbnail": "thumbnail_1591555239540.jpeg","sellerId": "5eda8d399fd8f11ba43ec566","sellerName": "Shreyas","price": 1000,"rating": 3.8},{"_id": "5ef1ce5f63507378842bd8c4","productId": "5eca97660e46221ae33a4dcf","productName": "Lenovo P1 Turbo","productThumbnail": "","sellerId": "","sellerName": "","price": 17000,"rating": 4.2}]

@@ -57,11 +57,38 @@ $(document).ready(function() {
                 productThumbnail: $product.attr('data-thumbnail'),
                 sellerId: $product.attr('data-sellerId'),
                 sellerName: $product.attr('data-seller'),
-                price: $product.attr('data-price')
+                price: $product.attr('data-price'),
+                rating: $product.attr('data-rating')
             },
             success: function(result) {
                 alert('Added to cart');
                 // window.location.reload();
+            },
+            error: function(err) {
+                alert('Failed to add to cart');
+            }
+        });
+            
+    });
+
+    $('#btnCheckOut').on('click',function(){
+        console.log('Add to Card clicked');
+        
+        let $product = $('#objProduct');
+        $.ajax({
+            url: "/user/addcart",
+            type: "POST",
+            data: {
+                productId: $product.attr('data-id'),
+                productName: $product.attr('data-title'),
+                productThumbnail: $product.attr('data-thumbnail'),
+                sellerId: $product.attr('data-sellerId'),
+                sellerName: $product.attr('data-seller'),
+                price: $product.attr('data-price'),
+                rating: $product.attr('data-rating')
+            },
+            success: function(result) {
+                window.location.href = '/user/cart';
             },
             error: function(err) {
                 alert('Failed to add to cart');

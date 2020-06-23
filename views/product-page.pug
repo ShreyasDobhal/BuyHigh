@@ -127,7 +127,7 @@
         <!-- Start of Products Display Card -->
 
         <!-- Product Information Container  -->
-        <div id="objProduct" data-id='#{product._id}' data-title='#{product.title}' data-seller='#{product.seller}' data-sellerId='#{product.sellerId}' data-price='#{product.price}' data-thumbnail='#{product.thumbnail}'></div>
+        <div id="objProduct" data-id='#{product._id}' data-title='#{product.title}' data-seller='#{product.seller}' data-sellerId='#{product.sellerId}' data-price='#{product.price}' data-rating='#{product.rating.value}' data-thumbnail='#{product.thumbnail}'></div>
 
         <div class="displayContainer">
             <div class="imageContainer">
@@ -150,7 +150,7 @@
                         <h5 class="card-title">Get this product now</h5>
                         if session.isSignedIn == true
                             <btn id="btnAddCart" class="btn btn-primary">Add to Cart</btn>
-                            <a href="#" class="btn btn-primary">Check Out</a>
+                            <btn id="btnCheckOut" class="btn btn-primary">Check Out</btn>
                         else 
                             <btn class="btn btn-secondary disabled">Add to Cart</btn>
                             <a href="#" class="btn btn-secondary disabled">Check Out</a>
