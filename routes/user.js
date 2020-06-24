@@ -16,13 +16,14 @@ router.get('/json',(req,res)=>{
 });
 
 router.get('/signup',(req,res)=>{
+
     res.status(200).render("signup.pug",{
         session: {
             isSignedIn: req.session.signedIn,
             userName: req.session.userName,
             userDP: req.session.userDP,
             userId: req.session.userId,
-            cartSize: 0,
+            cartSize: req.session.cartSize,
             buyRequests: 0
         }
     });
@@ -64,6 +65,8 @@ router.post('/signup',(req,res)=>{
                 req.session.userName = user.name;
                 req.session.userDP = user.userDP;
                 req.session.signedIn = true;
+                req.session.user = user;
+                req.session.cartSize = user.cart.length;
 
                 res.redirect('/home');
             }
@@ -94,6 +97,8 @@ router.post('/signin',(req,res)=>{
                 req.session.userName = currentUser.name;
                 req.session.userDP = currentUser.userDP;
                 req.session.userId = currentUser._id;
+                req.session.user = currentUser;
+                req.session.cartSize = currentUser.cart.length;
                 res.status(200).send('Signed in successfully');
             } else {
                 console.log("No such user found");
@@ -106,6 +111,8 @@ router.post('/signin',(req,res)=>{
 router.post('/logout',(req,res)=>{
     req.session.signedIn = false;
     req.session.userId = undefined;
+    req.session.user = undefined;
+    req.session.cartSize = 0;
     res.status(200).send('Logged out successfully');
 });
 
@@ -138,8 +145,6 @@ router.get('/products/:userId',(req,res)=>{
                 isEmpty = false;
             }
 
-            console.log('isOwnPage',isOwnPage);
-
             res.status(200).render('user-products.pug',{
                 products: products,
                 isOwnPage: isOwnPage,
@@ -149,7 +154,7 @@ router.get('/products/:userId',(req,res)=>{
                     userName: req.session.userName,
                     userDP: req.session.userDP,
                     userId: req.session.userId,
-                    cartSize: 0,
+                    cartSize: req.session.cartSize,
                     buyRequests: 0
                 }
             });
@@ -175,6 +180,7 @@ router.get('/cart',(req,res)=>{
                 if (!currentUser.cart || currentUser.cart.length==0)
                 isCartEmpty=true;
                 console.log(isCartEmpty);
+
                 res.status(200).render('cart.pug',{
                     session: {
                         isSignedIn: req.session.signedIn,
@@ -184,7 +190,7 @@ router.get('/cart',(req,res)=>{
                         userId: req.session.userId,
                         user: users[0],
                         cart: cart,
-                        cartSize: 0,
+                        cartSize: req.session.cartSize,
                         buyRequests: 0
                     }
                 });
@@ -193,13 +199,14 @@ router.get('/cart',(req,res)=>{
 
         
     } else {
+
         res.status(200).render('signin-fallback.pug',{
             session: {
                 isSignedIn: req.session.signedIn,
                 userName: req.session.userName,
                 userDP: req.session.userDP,
                 userId: req.session.userId,
-                cartSize: 0,
+                cartSize: req.session.cartSize,
                 buyRequests: 0
             }
         });
@@ -227,6 +234,7 @@ router.post('/addcart',(req,res)=>{
                 console.log(err);
                 res.status(500).send("Failed to add product to element");
             } else {
+                req.session.cartSize+=1;
                 res.status(200).send("Product Successfully added to cart");
             }
         });
@@ -245,6 +253,7 @@ router.delete('/clearcart',(req,res)=>{
                 console.log(err);
                 res.status(500).send("Failed to clear cart");
             } else {
+                req.session.cartSize = 0;
                 res.status(200).send("Cart successfully cleared");
             }
         });
@@ -262,6 +271,7 @@ router.delete('/product',(req,res)=>{
             console.log(err);
             res.status(500).send('Failed to removed product from cart');
         } else {
+            req.session.cartSize-=1;
             res.status(200).send('Product Removed from cart successfully');
         }
     });
@@ -279,6 +289,7 @@ router.get('/orders',(req,res)=>{
                 let isOrderEmpty = false;
                 if (!orders || orders.length==0)
                     isOrderEmpty = true;
+                
                 res.status(200).render('orders.pug',{
                     session: {
                         isSignedIn: req.session.signedIn,
@@ -287,7 +298,7 @@ router.get('/orders',(req,res)=>{
                         userDP: req.session.userDP,
                         userId: req.session.userId,
                         orders: orders,
-                        cartSize: 0,
+                        cartSize: req.session.cartSize,
                         buyRequests: 0
                     }
                 });
@@ -302,7 +313,7 @@ router.get('/orders',(req,res)=>{
                 userName: req.session.userName,
                 userDP: req.session.userDP,
                 userId: req.session.userId,
-                cartSize: 0,
+                cartSize: req.session.cartSize,
                 buyRequests: 0
             }
         });

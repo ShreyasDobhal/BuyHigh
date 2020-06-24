@@ -29,6 +29,10 @@ router.get('/:category',(req,res)=>{
 
             if (categoryMap[req.params.category]==undefined) {
                 // Category doesn't exsist
+                let cartSize = 0;
+                if (req.session.signedIn) {
+                    cartSize = req.session.user.cart.length;
+                }
                 res.status(200).render('category-fallback.pug',{
                     alertMessage: 'No such category found',
                     alertType: 'alert-danger',
@@ -38,7 +42,7 @@ router.get('/:category',(req,res)=>{
                         userName: req.session.userName,
                         userDP: req.session.userDP,
                         userId: req.session.userId,
-                        cartSize: 0,
+                        cartSize: cartSize,
                         buyRequests: 0
                     }
 
@@ -59,6 +63,12 @@ router.get('/:category',(req,res)=>{
                     isEmpty=true;
                 }
 
+
+                let cartSize = 0;
+                if (req.session.signedIn) {
+                    cartSize = req.session.user.cart.length;
+                }
+
                 res.status(200).render('category-page.pug',{
                     categoryImage: '/static/images/category_page_'+req.params.category+'.jpg',
                     categoryImageSmall: '/static/images/category_page_small_'+req.params.category+'.jpg',
@@ -73,7 +83,7 @@ router.get('/:category',(req,res)=>{
                         userName: req.session.userName,
                         userDP: req.session.userDP,
                         userId: req.session.userId,
-                        cartSize: 0,
+                        cartSize: cartSize,
                         buyRequests: 0
                     }
 

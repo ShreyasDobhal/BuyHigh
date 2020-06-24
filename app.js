@@ -12,6 +12,7 @@ const port = 4000;
 const dbName = 'buyhigh';
 
 let Product = require('./models/product');
+let User = require('./models/user');
 
 // MONGOOSE
 mongoose.connect(`mongodb://localhost/${dbName}`, {useNewUrlParser: true});
@@ -56,6 +57,7 @@ app.use(session({
 // userId
 // cartSize
 // buyRequests
+// user
 
 
 // ROUTES 
@@ -77,13 +79,14 @@ app.get('/',(req,res)=>{
 });
 
 app.get('/home',(req,res)=>{
+
     res.status(200).render('home.pug',{
         session: {
             isSignedIn: req.session.signedIn,
             userName: req.session.userName,
             userDP: req.session.userDP,
             userId: req.session.userId,
-            cartSize: 0,
+            cartSize: req.session.cartSize,
             buyRequests: 0
         }
     });
