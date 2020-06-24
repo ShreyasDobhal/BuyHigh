@@ -92,7 +92,6 @@ router.get('/view/:proId',(req,res)=>{
     Product.findById(req.params.proId,function(err,product){
         if (err || product==null) {
             console.log("Error in searching");
-            // console.log(err);
             res.status(200).render('product-page.pug',{
                 product: {},
                 alertMessage: 'No such product found',
@@ -120,7 +119,6 @@ router.get('/view/:proId',(req,res)=>{
                     ratePercentage[i] = 'width: '+(product.rating['val'+(i+1)]/totalRatings*100)+'%;';
                 }
             }
-            // console.log(ratePercentage);
             isCommentEmpty=false;
             if (product.reviews==undefined || product.reviews.length==0) {
                 isCommentEmpty=true;
@@ -265,8 +263,8 @@ router.post('/add',upload,(req,res)=>{
                    'alertMessage': 'Product added successfully',
                    'alertType': 'alert-success',
                    'alertShow':'show'
-                 }
-              }));
+                }
+            }));
         }
     });
 });
@@ -274,7 +272,6 @@ router.post('/add',upload,(req,res)=>{
 router.post('/addreview',(req,res)=>{
     console.log('Request Body');
     console.log(req.body);
-    // console.log(req.body.proId);
 
     let review = {
         userName: req.session.userName,
@@ -316,7 +313,6 @@ router.post('/addrating',(req,res)=>{
                         ratings[j]=0;
                     denominator += ratings[j];
                     numerator += ratings[j]*(j+1);
-                    // console.log(ratings[j]+'*'+(j+1)+'='+(ratings[j]*(j+1))+' => '+numerator);
                 }
                 ratings[req.body.rating-1]++;
                 denominator++;
@@ -363,7 +359,6 @@ router.get('/edit/:proId',(req,res)=>{
             } else {
                 let isOwnPage = (req.session.userId == product.sellerId);
                 console.log(product);
-                // let products = [product]
                 res.status(200).render('edit-product.pug',{
                     isOwnPage: isOwnPage,
                     product: product,
@@ -440,10 +435,6 @@ router.delete('/delete/:proId',(req,res)=>{
         }
     });
 });
-
-
-
-
 
 
 

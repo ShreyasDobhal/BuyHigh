@@ -3,16 +3,13 @@
 
 .displayContainer {
     display: flex;
-    /* border: 2px solid blue; */
     justify-content: center;
     margin-top: 120px;
-    /* align-items: center; */
 }
 
 .imageContainer {
     display: inline-block;
     width: 100%;
-    /* border: 2px solid red; */
     margin-top: 64px;
     text-align: center;
 }
@@ -24,7 +21,6 @@
 .detailContainer {
     display: inline-block;
     width: 100%;
-    /* border: 2px solid red; */
     padding-left: 20px;
     padding-right: 20px;
     font-family: 'Roboto', sans-serif;
@@ -39,15 +35,11 @@
 .paymentContainer {
     display: inline-block;
     width: 100%;
-    /* border: 2px solid red; */
-
 }
 
 .ratingContainer {
-    /* border: 2px solid blueviolet; */
     display: block;
     width: 100%;
-    /* height: 500px; */
     padding-top: 50px;
 }
 
@@ -58,35 +50,28 @@
 .ratingInfo {
     display: flex;
     flex-direction: row;
-    /* border: 2px solid red; */
-    /* align-items: center; */
 }
 
 .ratingValue {
-    /* border: 2px solid blueviolet; */
     font-size: 8rem;
     margin: 30px;
     color: #e29327;
 }
 
 .ratingBox {
-    /* border: 2px solid greenyellow; */
     display: inline-block;
     margin-top: 30px;
     margin-left: 10px;
-    /* min-width: 80%; */
 }
 
 .ratingBox .ratingMeter {
     display: flex;
     width: fit-content;
     margin: 5px;
-    /* border: 2px solid yellow; */
 }
 
 .ratingBox .ratingMeter .ratingNumber {
     display: inline-block;
-    /* border: 2px solid green; */
     padding-left: 10px;
     padding-right: 10px;
     color: #c37e20;
@@ -97,11 +82,9 @@
     height: 32px;
     border: 2px solid black;
     display: inline-block;
-    /* padding: 10px; */
 }
 
 .ratingBox .ratingMeter .ratingBarOutline .ratingBar {
-    /* width: 231px; */
     height: 30px;
     border: 1px solid black;
     position: relative;
@@ -110,7 +93,6 @@
     background-color: #ffa62f;
     display: inline-block;
     box-sizing: border-box;
-    /* padding: 10px;*/
 }
 
 
@@ -142,7 +124,6 @@
 /* For smaller screens */
 @media only screen and (max-width:1050px) and (min-width:500px) {
     .displayContainer {
-        /* border: 2px solid yellow; */
         display: grid;
         grid-template-columns: 2fr 3fr;
     }
@@ -151,7 +132,6 @@
 /* For even smaller screens */
 @media only screen and (max-width:500px)  {
     .displayContainer {
-        /* border: 2px solid green; */
         display: flex;
         flex-direction: column;
         margin-top: 10px;
@@ -180,6 +160,5 @@
     .ratingBox .ratingMeter .ratingBarOutline {
         width: 250px;
     }
-    
 
 }

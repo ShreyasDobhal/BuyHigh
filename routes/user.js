@@ -109,7 +109,6 @@ router.post('/logout',(req,res)=>{
     res.status(200).send('Logged out successfully');
 });
 
-// TODO
 router.get('/products/:userId',(req,res)=>{
     // View products of particular user
 
@@ -255,6 +254,7 @@ router.delete('/clearcart',(req,res)=>{
 });
 
 router.delete('/product',(req,res)=>{
+    // Remove product from cart
 
     User.updateOne({_id:req.session.userId},{$pull: {cart:{productId:req.body.productId}} },function(err,user) {
         if (err) {
@@ -268,6 +268,7 @@ router.delete('/product',(req,res)=>{
 })
 
 router.get('/orders',(req,res)=>{
+    // Display all orders
 
     if (req.session.signedIn) {
 
@@ -312,7 +313,6 @@ router.post('/addorder',(req,res)=>{
     // Add product to cart
     console.log("Adding to order");
     console.log(req.body);
-    // console.log(req.body.orders);
     if (req.session.signedIn) {
 
         User.find({_id:req.session.userId}).then(function(user) {
@@ -360,7 +360,4 @@ router.post('/addorder',(req,res)=>{
 });
 
 
-
 module.exports = router;
-
-//[{"_id": "5ef1c29f8a3b0c7252b0e3d2","productId": "5edd34a736c4e230749d6ebb","productName": "User-Sample","productThumbnail": "thumbnail_1591555239540.jpeg","sellerId": "5eda8d399fd8f11ba43ec566","sellerName": "Shreyas","price": 1000,"rating": 3.8},{"_id": "5ef1ce5f63507378842bd8c4","productId": "5eca97660e46221ae33a4dcf","productName": "Lenovo P1 Turbo","productThumbnail": "","sellerId": "","sellerName": "","price": 17000,"rating": 4.2}]

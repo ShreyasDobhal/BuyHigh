@@ -13,8 +13,6 @@ $(document).ready(function() {
                 type: "POST",
                 data: {
                     proId: $('#objProduct').attr('data-id'),
-                    // userName: 'user'+Math.floor(Math.random()*100),
-                    // userDP: (Math.floor(Math.random()*5)+1),
                     rating: rating,
                     review: review
                 },
@@ -62,7 +60,6 @@ $(document).ready(function() {
             },
             success: function(result) {
                 alert('Added to cart');
-                // window.location.reload();
             },
             error: function(err) {
                 alert('Failed to add to cart');

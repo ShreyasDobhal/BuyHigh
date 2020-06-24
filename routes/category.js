@@ -29,19 +29,10 @@ router.get('/:category',(req,res)=>{
 
             if (categoryMap[req.params.category]==undefined) {
                 // Category doesn't exsist
-                // TODO create a proper fallback page
-                res.status(200).send("<h1>Category not Found<h1>");
-            } else if (products.length==0) {
-                // No product in this category
-                res.status(200).render('category-page.pug',{
-                    categoryImage: '/static/images/category_page_'+req.params.category+'.jpg',
-                    categoryImageSmall: '/static/images/category_page_small_'+req.params.category+'.jpg',
-                    categoryName: categoryMap[req.params.category],
-                    products: products,
-                    alertMessage: 'No Products Found',
+                res.status(200).render('category-fallback.pug',{
+                    alertMessage: 'No such category found',
                     alertType: 'alert-danger',
                     alertShow: 'show',
-                    isEmpty: true,
                     session: {
                         isSignedIn: req.session.signedIn,
                         userName: req.session.userName,
@@ -56,11 +47,27 @@ router.get('/:category',(req,res)=>{
                 
                 console.log("Products");
                 console.log(products);
+
+                let alertMessage='';
+                let alertType='alert-danger';
+                let alertShow='';
+                let isEmpty=false;
+
+                if (products.length==0) {
+                    alertMessage='No Products Found';
+                    alertShow='show';
+                    isEmpty=true;
+                }
+
                 res.status(200).render('category-page.pug',{
                     categoryImage: '/static/images/category_page_'+req.params.category+'.jpg',
                     categoryImageSmall: '/static/images/category_page_small_'+req.params.category+'.jpg',
                     categoryName: categoryMap[req.params.category],
                     products: products,
+                    alertMessage: alertMessage,
+                    alertType: alertType,
+                    alertShow: alertShow,
+                    isEmpty: isEmpty,
                     session: {
                         isSignedIn: req.session.signedIn,
                         userName: req.session.userName,
@@ -76,196 +83,5 @@ router.get('/:category',(req,res)=>{
         }
     });
 });
-
-
-
-// router.get('/',(req,res)=>{
-//     // View all the products
-//     console.log("Products searched");
-//     Product.find({}, function(err,products){
-//         if (err) {
-//             console.log("Error in displaying all products");
-//             console.log(err);
-//             res.send("Error");
-//         } else {
-//             console.log("Products are :");
-//             console.log(products);
-//             res.status(200).render('products.pug',{
-//                 products: products,
-//                 alertMessage: req.query.alertMessage,
-//                 alertType: req.query.alertType,
-//                 alertShow: req.query.alertShow
-//             });
-//         }
-//     });
-// });
-
-// router.get('/view/:proId',(req,res)=>{
-//     // View product with given id
-//     Product.findById(req.params.proId,function(err,product){
-//         if (err) {
-//             console.log("Error in searching");
-//             return;
-//         } else {
-//             console.log(product);
-//             let products = [product]
-//             if (product==null) {
-//                 // No Product found
-//                 // TODO provide better fallback
-//                 res.status(200).send('Product Not Found');
-//             } else {
-//                 res.status(200).render('products.pug',{
-//                     products: products
-//                 });
-//             }
-            
-//         }
-//     });
-// });
-
-
-// router.get('/search/:tag',(req,res)=>{
-//     // View all the products
-//     var tag = new RegExp(["^", req.params.tag, "$"].join(""), "i");
-//     Product.find({tags:tag}, function(err,products){
-//         if (err) {
-//             console.log("Error in displaying all products");
-//             console.log(err);
-//             res.send("Error");
-//         } else {
-//             console.log("Products are :");
-//             console.log(products);
-//             let alertMessage = '';
-//             let alertType = '';
-//             let alertShow = '';
-
-//             if (products.length==0) {
-//                 alertMessage = 'No product matched your search';
-//                 alertType = 'alert-danger';
-//                 alertShow = 'show';
-//             }
-//             res.status(200).render('products.pug',{
-//                 products: products,
-//                 alertMessage: alertMessage,
-//                 alertType: alertType,
-//                 alertShow: alertShow
-//             });
-//         }
-//     });
-// });
-
-// router.get('/add',(req,res)=>{
-//     // Add a product
-//     res.status(200).render('add-product.pug');
-// });
-
-
-// router.post('/add',upload,(req,res)=>{
-//     // POST method to handle add request
-//     console.log(req.file.filename+' added successfully');
-
-//     console.log("Request Body");
-//     console.log(req.body);
-//     console.log("File received");
-//     console.log(req.file);
-
-//     let tags = req.body.tags.split(',');
-//     for (let i=0;i<tags.length;i++)
-//         tags[i]=tags[i].trim();
-
-//     let product = new Product();
-//     product.title = req.body.title;
-//     product.seller = req.body.seller;
-//     product.body = req.body.description;
-//     product.price = req.body.price;
-//     product.status = req.body.status;
-//     product.thumbnail = req.file.filename;
-//     product.date = new Date();
-//     product.tags = tags;
-
-//     product.save((err,product)=>{
-//         if (err) {
-//             console.log("Error in adding new product");
-//             console.log(err);
-//             return;
-//         } else {
-//             let string = encodeURIComponent('product was addedd successfully and routed');
-//             res.redirect(url.format({
-//                 pathname:"/products",
-//                 query: {
-//                    'alertMessage': 'Product added successfully',
-//                    'alertType': 'alert-success',
-//                    'alertShow':'show'
-//                  }
-//               }));
-//         }
-//     });
-// });
-
-// router.get('/edit/:proId',(req,res)=>{
-//     // Edit product with given id
-//     Product.findById(req.params.proId,function(err,product){
-//         if (err) {
-//             console.log("Error in searching");
-//             return;
-//         } else {
-//             console.log(product);
-//             // let products = [product]
-//             res.status(200).render('edit-product.pug',{
-//                 product: product
-//             });
-//         }
-//     });
-// });
-
-// router.post('/edit/:proId',(req,res)=>{
-//     // Post method to handle edit request
-//     console.log("Request Body");
-//     console.log(req.body);
-
-//     let tags = req.body.tags.split(',');
-//     for (let i=0;i<tags.length;i++)
-//         tags[i]=tags[i].trim();
-
-//     let product = {};
-//     product.title = req.body.title;
-//     product.seller = req.body.seller;
-//     product.body = req.body.description;
-//     product.price = req.body.price;
-//     product.status = req.body.status;
-//     product.tags = tags;
-
-//     Product.updateOne({'_id':req.params.proId},product,(err,product)=>{
-//         if (err) {
-//             console.log("Error in updating");
-//             console.log(err);
-//             return;
-//         } else {
-//             res.redirect('/products');
-//         }
-//     });
-// });
-
-// router.delete('/delete/:proId',(req,res)=>{
-//     // DELETE method to handle delete request
-//     console.log("Request Body");
-//     console.log(req.body);
-
-//     Product.remove({'_id':req.params.proId},(err,product)=>{
-//         if (err) {
-//             console.log("Error in deleting");
-//             console.log(err);
-//             return;
-//         } else {
-//             res.redirect('/products');
-//         }
-//     });
-// });
-
-
-
-
-
-
 
 module.exports = router;

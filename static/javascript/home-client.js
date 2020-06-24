@@ -9,8 +9,3 @@ $(document).ready(function() {
         window.location.href = '/category/'+category;
     });
 });
-
-
-    // background: #efefef;
-    // border: 2px solid #a39696;
-    // box-shadow: 8px 8px 9px 0px #656464;

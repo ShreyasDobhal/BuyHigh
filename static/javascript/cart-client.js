@@ -25,17 +25,13 @@ $(document).ready(function() {
     $('#buyBtn').on('click',function() {
         console.log('Buy button clicked');
 
-        // TODO Add product to orders
         let userId = $(this).attr('data-userId');
-        // let userCart = $(this).attr('data-userCart');
-        // console.log(userId);
-
+        
         $.ajax({
             url: "/user/addorder",
             type: "POST",
             data: {
                 userId: userId
-                // orders: userCart
             },
             success: function(result) {
                 

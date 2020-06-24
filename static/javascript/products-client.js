@@ -25,7 +25,6 @@ $(document).ready(function(){
         } else if (status=='Offer' || status=='Sale' || status=='Discount') {
             $productStatus.eq(0).addClass('badge-warning');
         } else if (status=='') {
-            // let date = $productCard.eq(i).find('p.hiddenElement')[0].innerHTML;
             let date = $productCard.eq(i).attr('data-productDate');
             if (date!='') {
                 let date1 = new Date(date);

@@ -62,8 +62,3 @@ let productSchema = mongoose.Schema({
 });
 
 let Product = module.exports = mongoose.model('Product',productSchema);
-
-// db.products.updateOne({'_id':ObjectId('5eca97660e46221ae33a4dcf')},{$set:{reviews:[{userName:'user01',userDP:1,rating:4,comment:'This product is amazing, can be used by anyone. Easy to learn and get used to it. Makes life very easy'},{userName:'user02',userDP:2,rating:5,comment:'Just loved it. Can be used by kids as well as old people.'}]}})
-// db.products.updateOne({'_id':ObjectId('5eca97660e46221ae33a4dcf')},{$pull:{reviews:{'0':{userName:'user03'}}}})
-// db.products.updateOne({'_id':ObjectId('5eca97660e46221ae33a4dcf')},{$push:{reviews:{userName:'user03',userDP:3,rating:5,comment:'No words can describe how brilliant it is'}}})
-// db.products.updateOne({'_id':ObjectId('5eca97660e46221ae33a4dcf')},{$set:{rating:{value:4.6,val5:2,val4:1,val3:0,val2:0,val1:0}}})
