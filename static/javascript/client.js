@@ -65,5 +65,19 @@ $(document).ready(function() {
             window.location.href = '/products/search/'+searchQuery;
         }
     });
+    
+    $('.productSpan').on('click',function() {
+        console.log('productSpan clicked');
+
+        let proId = $(this).attr('data-productId');
+        window.location.href = '/products/view/'+proId;
+    });
+
+    $('.sellerSpan').on('click',function() {
+        console.log('sellerSpan clicked');
+
+        let sellerId = $(this).attr('data-sellerId');
+        window.location.href = '/user/products/'+sellerId;
+    });
 
 });
