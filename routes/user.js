@@ -75,7 +75,10 @@ router.post('/signup',(req,res)=>{
         res.status(200).render('signup.pug',{
             alertMessage: message,
             alertType: 'alert-danger',
-            alertShow: 'show'
+            alertShow: 'show',
+            session: {
+                isSignedIn: false
+            }
         });    
     }
 });

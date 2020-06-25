@@ -156,88 +156,94 @@
                 </div>
             </div>
         </div>
-        <!-- Rating Component -->
+        
+
+        <div class="container">
+
+            <!-- Rating Component -->
         <div class="ratingContainer">
             <h2>Product Rating</h2>
-            <div class="ratingInfo">
-                <div class="ratingBox">
-                    <div class="ratingMeter">
-                        <div class="ratingNumber">5</div>
-                        <div class="ratingBarOutline">
-                            <div class="ratingBar" style='#{rating5Cnt}'></div>
+                <div class="ratingInfo">
+                    <div class="ratingBox">
+                        <div class="ratingMeter">
+                            <div class="ratingNumber">5</div>
+                            <div class="ratingBarOutline">
+                                <div class="ratingBar" style='#{rating5Cnt}'></div>
+                            </div>
+                        </div>
+                        <div class="ratingMeter">
+                            <div class="ratingNumber">4</div>
+                            <div class="ratingBarOutline">
+                                <div class="ratingBar" style="#{rating4Cnt}"></div>
+                            </div>
+                        </div>
+                        <div class="ratingMeter">
+                            <div class="ratingNumber">3</div>
+                            <div class="ratingBarOutline">
+                                <div class="ratingBar" style="#{rating3Cnt}"></div>
+                            </div>
+                        </div>
+                        <div class="ratingMeter">
+                            <div class="ratingNumber">2</div>
+                            <div class="ratingBarOutline">
+                                <div class="ratingBar" style="#{rating2Cnt}"></div>
+                            </div>
+                        </div>
+                        <div class="ratingMeter">
+                            <div class="ratingNumber">1</div>
+                            <div class="ratingBarOutline">
+                                <div class="ratingBar" style="#{rating1Cnt}"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="ratingMeter">
-                        <div class="ratingNumber">4</div>
-                        <div class="ratingBarOutline">
-                            <div class="ratingBar" style="#{rating4Cnt}"></div>
-                        </div>
-                    </div>
-                    <div class="ratingMeter">
-                        <div class="ratingNumber">3</div>
-                        <div class="ratingBarOutline">
-                            <div class="ratingBar" style="#{rating3Cnt}"></div>
-                        </div>
-                    </div>
-                    <div class="ratingMeter">
-                        <div class="ratingNumber">2</div>
-                        <div class="ratingBarOutline">
-                            <div class="ratingBar" style="#{rating2Cnt}"></div>
-                        </div>
-                    </div>
-                    <div class="ratingMeter">
-                        <div class="ratingNumber">1</div>
-                        <div class="ratingBarOutline">
-                            <div class="ratingBar" style="#{rating1Cnt}"></div>
-                        </div>
-                    </div>
+                    <div class="ratingValue">#{product.rating.value}</div>
                 </div>
-                <div class="ratingValue">#{product.rating.value}</div>
+                
             </div>
-            
-        </div>
+            <!-- Feedback Component -->
+            <div class="feedbackContainer">
+                <h2>Add Your Review</h2>
+                <div class="formContainer">
+                    <form>
+                        <div class="starRating">
+                            <x-star-rating id="inputRating" value='4' number='5' type='input'></x-star-rating>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <textarea id="inputReview" class="form-control" id="txtFeedback" rows="6" placeholder="Your feedback"></textarea>
+                        </div>
+                    </form>
+                    if session.isSignedIn == true
+                        <button id="btnAddReview" class="btn btn-primary btn-lg mx-3">Add Review</button>
+                    else 
+                        <button class="btn btn-secondary disabled btn-lg mx-3">Add Review</button>
 
-        <!-- Feedback Component -->
-        <div class="feedbackContainer">
-            <h2>Add Your Review</h2>
-            <div class="formContainer">
-                <form>
-                    <div class="starRating">
-                        <x-star-rating id="inputRating" value='4' number='5' type='input'></x-star-rating>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <textarea id="inputReview" class="form-control" id="txtFeedback" rows="6" placeholder="Your feedback"></textarea>
-                    </div>
-                </form>
-                if session.isSignedIn == true
-                    <button id="btnAddReview" class="btn btn-primary btn-lg mx-3">Add Review</button>
-                else 
-                    <button class="btn btn-secondary disabled btn-lg mx-3">Add Review</button>
-
+                </div>
             </div>
-        </div>
 
-        <!-- Comment Component -->
-        <div class="commentContainer">
-            <h2>Comments</h2>
-            
-            <div class="commentSection">
-                if isCommentEmpty == true
-                    <h5>No comments added</h5>
-                else
-                    <ul class="list-unstyled">
-                        each review,i in product.reviews
-                            <li class="media my-4">
-                                <img src="/static/images/dp#{review.userDP}.png" class="mr-3" alt="..." onerror=this.src="/static/images/dp5.png">
-                                <div class="media-body">
-                                    <h5 class="mt-0 mb-1">#{review.userName}</h5>
-                                    <p class='my-0'>#{review.comment}</p>
-                                    <x-star-rating value='#{review.rating}' number='5' type='static' style="font-size: 22px;"></x-star-rating>
-                                </div>
-                            </li>
-                    </ul>
+            <!-- Comment Component -->
+            <div class="commentContainer">
+                <h2>Comments</h2>
+                
+                <div class="commentSection">
+                    if isCommentEmpty == true
+                        <h5>No comments added</h5>
+                    else
+                        <ul class="list-unstyled">
+                            each review,i in product.reviews
+                                <li class="media my-4">
+                                    <img src="/static/images/dp#{review.userDP}.png" class="mr-3" alt="..." onerror=this.src="/static/images/dp5.png">
+                                    <div class="media-body">
+                                        <h5 class="mt-0 mb-1">#{review.userName}</h5>
+                                        <p class='my-0'>#{review.comment}</p>
+                                        <x-star-rating value='#{review.rating}' number='5' type='static' style="font-size: 22px;"></x-star-rating>
+                                    </div>
+                                </li>
+                        </ul>
+                </div>
             </div>
         </div>
+
+        
     
     <!-- Start of Sign in Modal -->
     <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">

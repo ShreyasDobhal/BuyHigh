@@ -233,7 +233,11 @@ router.get('/add',(req,res)=>{
 
 router.post('/add',upload,(req,res)=>{
     // POST method to handle add request
-    console.log(req.file.filename+' added successfully');
+    let receivedFile=undefined;
+    if (req.file && req.file.filename)
+        receivedFile=req.file.filename;
+
+    console.log(receivedFile+' added successfully');
 
     console.log("Request Body");
     console.log(req.body);
@@ -251,11 +255,27 @@ router.post('/add',upload,(req,res)=>{
     product.body = req.body.description;
     product.price = req.body.price;
     product.status = req.body.status;
-    product.thumbnail = req.file.filename;
+    product.thumbnail = receivedFile;
     product.date = new Date();
     product.tags = tags;
     product.category = req.body.category;
     product.quantity = req.body.quantity;
+
+    if (!product.title || !product.body || !product.price || !product.thumbnail || !product.category || !product.quantity) {
+        res.status(200).render('add-product.pug',{
+            alertMessage: 'Enter all the entries with (*)',
+            alertType: 'alert-danger',
+            alertShow: 'show',
+            session: {
+                isSignedIn: req.session.signedIn,
+                userName: req.session.userName,
+                userDP: req.session.userDP,
+                userId: req.session.userId,
+                cartSize: req.session.cartSize,
+                buyRequests: 0
+            }
+        });
+    }
 
     product.save((err,product)=>{
         if (err) {
@@ -264,14 +284,15 @@ router.post('/add',upload,(req,res)=>{
             return;
         } else {
             let string = encodeURIComponent('product was addedd successfully and routed');
-            res.redirect(url.format({
-                pathname:"/products",
-                query: {
-                   'alertMessage': 'Product added successfully',
-                   'alertType': 'alert-success',
-                   'alertShow':'show'
-                }
-            }));
+            // res.redirect(url.format({
+            //     pathname:"/user/products/"+req.session.userId,
+            //     query: {
+            //        'alertMessage': 'Product added successfully',
+            //        'alertType': 'alert-success',
+            //        'alertShow':'show'
+            //     }
+            // }));
+            res.redirect("/user/products/"+req.session.userId);
         }
     });
 });
@@ -423,7 +444,7 @@ router.post('/edit/:proId',(req,res)=>{
             console.log(err);
             return;
         } else {
-            res.redirect('/products');
+            res.redirect('/user/products/'+req.session.userId);
         }
     });
 });
