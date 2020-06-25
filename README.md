@@ -3,10 +3,10 @@
 Web application for Online Marketplace build using Express.js and MongoDB
 
 **Tech Stack :**
-Front-end : HTML/CSS + Bootstrap
-Client-side : Javascript
-Server-side : Express.js and Node.js
-Database : MongoDB
+1) Front-end : HTML/CSS + Bootstrap
+2) Client-side : Javascript
+3) Server-side : Express.js and Node.js
+4) Database : MongoDB
 
 **Installation and Setup :**
 1) Make sure you already have node installed on your system.
